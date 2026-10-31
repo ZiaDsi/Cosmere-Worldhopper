@@ -441,12 +441,22 @@ function renderCosmereGallery(containerId, books) {
             activeButton = activePanel = null;
             activeTitle = "";
             if (isClosing) return;
-
+            
             const panel = createBookDetailsPanel(book, null, null, containerId);
             panel.hidden = false;
+
+            // Place details immediately after the selected book on mobile.
+            // Keep the original position below the gallery on desktop.
+            if (window.matchMedia("(max-width: 768px)").matches) {
+                card.insertAdjacentElement("afterend", detailsHost);
+            } else {
+                gallery.insertAdjacentElement("afterend", detailsHost);
+            }
+
             detailsHost.appendChild(panel);
             detailsHost.hidden = false;
             setDetailsButtonState(detailsButton, book.title, true);
+
             activeButton = detailsButton;
             activePanel = panel;
             activeTitle = book.title;
