@@ -18,7 +18,6 @@ An **unofficial, spoiler-conscious reading companion** for Brandon Sanderson's C
 - `style.css` — dark-and-gold theme, layouts, responsive design, and animations.
 - `books.js` — source of truth for all books, the two reading orders, and descriptions. **The book data in the supplied upload was kept unchanged.**
 - `script.js` — navigation, rendering, progress, search, and spoiler controls.
-- `QA_REPORT.md` — test results and important limitations.
 
 ### Images not included
 
