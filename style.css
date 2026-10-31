@@ -332,11 +332,36 @@ button:focus-visible {
    ===================================== */
 
 @media (max-width: 768px) {
+ 
+    /* =====================================
+    MOBILE BACKGROUND 
+    ===================================== */
 
-    /* Background */
     body {
-        background-attachment: scroll;
-        background-position: center;
+        position: relative;
+        isolation: isolate;
+        background-image: none;
+    }
+
+    /* Keep the background fitted to the phone's screen,
+    not the full height of the page. */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+
+        background-image:
+            linear-gradient(
+                rgba(7, 10, 14, 0.72),
+                rgba(7, 10, 14, 0.78)
+            ),
+            url("images/main_bg.jpg");
+
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
     }
 
     /* Homepage containers */
