@@ -1,0 +1,1393 @@
+/* =====================================
+   GLOBAL STYLES AND TYPOGRAPHY
+   ===================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #101315;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #F1E5CB;
+    font-family: 'Lora', Georgia, serif;
+    text-align: center;
+
+    /* Shared castle background for every page. */
+    background-image:
+        linear-gradient(rgba(7, 10, 14, 0.72), rgba(7, 10, 14, 0.78)),
+        url("images/hero_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1,
+h2,
+.heroTag {
+    font-family: 'Cinzel', Georgia, serif;
+}
+
+h1 {
+    color: #B9975B;
+    font-size: 48px;
+    letter-spacing: 3px;
+    text-shadow: 0 3px 18px #000000;
+}
+
+h2 {
+    color: #B9975B;
+    font-size: 28px;
+    margin-bottom: 35px;
+}
+
+p {
+    max-width: 600px;
+    margin: 25px auto 65px;
+    color: #D6CEBC;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* Keep sections genuinely hidden when JavaScript switches pages. */
+[hidden] {
+    display: none !important;
+}
+
+/* =====================================
+   SHARED BUTTONS AND PAGE LAYOUT
+   ===================================== */
+
+button {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    margin: 15px auto;
+    padding: 18px;
+    background: linear-gradient(135deg, #342A1B, #1C1C1A);
+    color: #F1E5CB;
+    border: 1px solid #B9975B;
+    border-radius: 8px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease,
+                transform 0.3s ease, box-shadow 0.3s ease,
+                border-color 0.3s ease;
+}
+
+button:hover {
+    background: #B9975B;
+    color: #101315;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px #00000080;
+}
+
+button:focus-visible {
+    outline: 3px solid #F1E5CB;
+    outline-offset: 4px;
+}
+
+#introduction,
+#cosmereExplorer {
+    padding: 90px 20px;
+}
+
+/* =====================================
+   HOMEPAGE HERO SECTION
+   ===================================== */
+
+.heroPage {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.heroOverlay {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.heroContent {
+    max-width: 900px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.heroTag {
+    margin-bottom: 18px;
+    color: #D9B36A;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.heroContent h1 {
+    margin-bottom: 20px;
+    color: #D9B36A;
+    font-size: clamp(32px, 5vw, 72px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    overflow-wrap: anywhere;
+}
+
+.heroSubtitle {
+    max-width: 760px;
+    margin: 0 auto 40px;
+    color: #F2E6CF;
+    font-size: 21px;
+    line-height: 1.9;
+}
+
+.heroButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.heroButtons button {
+    min-width: 240px;
+    padding: 18px 28px;
+    font-size: 20px;
+}
+
+/* =====================================
+   HOMEPAGE ENTRANCE ANIMATION
+   ===================================== */
+
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.heroTag,
+.heroContent h1,
+.heroSubtitle,
+.heroButtons {
+    opacity: 0;
+    animation: heroFadeUp 0.5s ease-out forwards;
+}
+
+.heroTag {
+    animation-delay: 0.1s;
+}
+
+.heroContent h1 {
+    animation-delay: 0.25s;
+}
+
+.heroSubtitle {
+    animation-delay: 0.45s;
+}
+
+.heroButtons {
+    animation-delay: 0.65s;
+}
+
+/* ==========================================
+   COSMERE WORLDHOPPER HOMEPAGE FEATURES
+   ========================================== */
+
+/* Arrange the three homepage feature cards. */
+.cosmereHomeFeatures {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    max-width: 850px;
+    margin: 0 auto 35px;
+}
+
+/* Individual feature cards. */
+.cosmereHomeFeature {
+    min-width: 0;
+    padding: 20px 15px;
+    background: rgba(27, 32, 29, 0.88);
+    border: 1px solid #665438;
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* Feature headings. */
+.cosmereHomeFeature h2 {
+    margin: 0 0 12px;
+    color: #D9B36A;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 18px;
+}
+
+/* Feature descriptions. */
+.cosmereHomeFeature p {
+    max-width: none;
+    margin: 0;
+    color: #D6CEBC;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Responsive layout for mobile devices. */
+@media (max-width: 768px) {
+
+    .cosmereHomeFeatures {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        max-width: 420px;
+    }
+
+    .cosmereHomeFeature {
+        padding: 16px;
+    }
+
+    .cosmereHomeFeature h2 {
+        font-size: 16px;
+    }
+
+    .cosmereHomeFeature p {
+        font-size: 13px;
+    }
+
+}
+
+/* =====================================
+   COSMERE EXPLORER MENU
+   ===================================== */
+
+/* Three navigation buttons per desktop row, with a centered final row. */
+.cosmereButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.cosmereButtons button {
+    flex: 0 0 calc((100% - 40px) / 3);
+    width: 100%;
+    max-width: none;
+    min-height: 82px;
+    margin: 0;
+    padding: 9px 12px;
+    font-size: 19px;
+    line-height: 1.3;
+    font-weight: bold;
+}
+
+@media (hover: hover) {
+    .cosmereButtons button:hover {
+        transform: translateY(-6px);
+        background: linear-gradient(145deg, #493821, #23241E);
+        color: #F1E5CB;
+        border-color: #D9B36A;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5),
+                    0 0 18px rgba(185, 151, 91, 0.2);
+    }
+}
+
+/* Match the homepage button dimensions on mobile. */
+@media (max-width: 768px) {
+    .cosmereButtons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        margin: 30px auto;
+    }
+
+    .cosmereButtons button,
+    #cosmereMenu > button {
+        flex: none;
+        width: 100%;
+        max-width: 320px;
+        min-height: 0;
+        padding: 16px;
+        font-size: 15px;
+    }
+}
+
+/* =====================================
+   MOBILE AND TABLET LAYOUT
+   ===================================== */
+
+@media (max-width: 768px) {
+
+    /* Background */
+    body {
+        background-attachment: scroll;
+        background-position: center;
+    }
+
+    /* Homepage containers */
+    .heroPage,
+    .heroOverlay {
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+
+    .heroOverlay {
+        padding: 35px 15px;
+    }
+
+    .heroContent {
+        width: 100%;
+        padding: 20px 10px;
+    }
+
+    /* Homepage title */
+    .heroContent h1 {
+        font-size: clamp(24px, 6vw, 42px);
+        letter-spacing: 1px;
+        overflow-wrap: anywhere;
+    }
+
+    /* Homepage tagline */
+    .heroTag {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    /* Homepage description */
+    .heroSubtitle {
+        margin-bottom: 30px;
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    /* Homepage navigation */
+    .heroButtons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .heroButtons button {
+        width: 100%;
+        max-width: 320px;
+        min-width: 0;
+        padding: 16px;
+        font-size: 15px;
+    }
+
+    /* Introduction and Cosmere content pages */
+    #introduction,
+    #cosmereExplorer {
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 50px 16px 60px;
+    }
+
+    /* Section headings */
+    #introduction h1,
+    #cosmereExplorer h1 {
+        max-width: 100%;
+        margin: 0 auto 25px;
+        font-size: clamp(25px, 6.8vw, 36px);
+        letter-spacing: 1px;
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+        text-wrap: balance;
+    }
+
+    #cosmereExplorer h1 {
+        font-size: clamp(23px, 6vw, 32px);
+        letter-spacing: 0.5px;
+    }
+
+    /* Introduction paragraphs */
+    #introduction > p {
+        margin: 0 auto 35px;
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+}
+
+/* =====================================
+   COSMERE READING GUIDE
+   ===================================== */
+
+/* Reading order selection buttons */
+.cosmereOrderSwitch {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 700px;
+    margin: 30px auto;
+}
+
+.cosmereOrderSwitch button {
+    flex: 1 1 250px;
+    max-width: 320px;
+    margin: 0;
+}
+
+/* Highlight the selected reading order */
+.cosmereOrderSwitch button[aria-pressed="true"] {
+    background: #B9975B;
+    color: #101315;
+    font-weight: bold;
+}
+
+/* Complete numbered reading list */
+.cosmereReadingList {
+    list-style: none;
+    max-width: 850px;
+    margin: 30px auto 45px;
+    padding: 0;
+}
+
+/* Individual reading list entry */
+.cosmereReadingItem {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 12px;
+    padding: 20px;
+    background: #1B201D;
+    border: 1px solid #665438;
+    border-radius: 12px;
+    text-align: left;
+}
+
+/* Book position number */
+.cosmereReadingNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    color: #D9B36A;
+    border: 1px solid #B9975B;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Book information */
+.cosmereReadingDetails {
+    flex: 1;
+    min-width: 0;
+}
+
+.cosmereReadingTitle {
+    display: block;
+    color: #D9B36A;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 18px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.cosmereReadingMeta {
+    display: block;
+    margin-top: 7px;
+    color: #D6CEBC;
+    font-size: 14px;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+
+    .cosmereOrderSwitch button {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .cosmereReadingItem {
+        padding: 15px;
+    }
+
+    .cosmereReadingTitle {
+        font-size: 16px;
+    }
+
+    .cosmereReadingMeta {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+}
+
+/* =====================================
+   COSMERE READING LIST COVERS
+   ===================================== */
+
+/* Container for book-cover images */
+.cosmereReadingCover {
+    width: 65px;
+    height: 95px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid #B9975B;
+    border-radius: 5px;
+    box-shadow: 3px 5px 12px #00000080;
+}
+
+/* Display the image inside the container */
+.cosmereReadingCover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Placeholder for books without cover images yet */
+.cosmereReadingCoverPlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background: linear-gradient(145deg, #342A1B, #171A18);
+    color: #C9A978;
+    font-size: 10px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Smaller covers on mobile devices */
+@media (max-width: 768px) {
+
+    .cosmereReadingCover {
+        width: 50px;
+        height: 74px;
+    }
+
+    .cosmereReadingNumber {
+        width: 35px;
+        height: 35px;
+    }
+
+    .cosmereReadingItem {
+        gap: 10px;
+    }
+
+}
+
+/* =====================================
+   EXPANDABLE COSMERE BOOK DETAILS
+   ===================================== */
+
+/* Button for showing and hiding book information. */
+.cosmereDetailsToggle {
+    display: inline-block;
+    width: auto;
+    max-width: none;
+    margin: 12px 0 0;
+    padding: 9px 14px;
+    background: transparent;
+    color: #D9B36A;
+    border: 1px solid #B9975B;
+    font-size: 13px;
+}
+
+/* Expanded information panel. */
+.cosmereDetailsPanel {
+    flex: 0 0 100%;
+    padding: 18px;
+    background: #151A18;
+    border-top: 1px solid #665438;
+    border-radius: 8px;
+    text-align: left;
+}
+
+/* Expanded book title. */
+.cosmereDetailsPanel h3 {
+    margin: 0 0 12px;
+    color: #D9B36A;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 18px;
+}
+
+/* Expanded book information. */
+.cosmereDetailsPanel p {
+    max-width: none;
+    margin: 8px 0;
+    color: #D6CEBC;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* =====================================
+   COSMERE BOOK DESCRIPTIONS
+   ===================================== */
+
+.cosmereDetailsPanel h4 {
+    margin: 20px 0 8px;
+    padding-top: 15px;
+    color: #D9B36A;
+    border-top: 1px solid #665438;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 15px;
+}
+
+.cosmereDetailsPanel .cosmereBookOverview {
+    margin: 8px 0;
+    color: #D6CEBC;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* =====================================
+   COSMERE SPOILER PROTECTION
+   ===================================== */
+
+/* Separate protected content from the book information. */
+.cosmereSpoilerSection {
+    margin-top: 20px;
+    padding: 18px;
+    background: #1B201D;
+    border: 1px solid #665438;
+    border-radius: 10px;
+}
+
+/* Clearly identify spoiler warnings. */
+.cosmereSpoilerSection h4 {
+    margin: 0 0 12px;
+    padding: 0;
+    color: #D9B36A;
+    border: none;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 17px;
+}
+
+.cosmereSpoilerSection .cosmereSpoilerWarning {
+    margin: 0 0 16px;
+    color: #F1E5CB;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Decorative blurred lines; no spoiler text is exposed. */
+.cosmereSpoilerMask {
+    height: 65px;
+    margin: 15px 0;
+    border-radius: 8px;
+
+    background:
+        linear-gradient(#665438, #665438)
+            0 5px / 95% 9px no-repeat,
+        linear-gradient(#665438, #665438)
+            0 25px / 80% 9px no-repeat,
+        linear-gradient(#665438, #665438)
+            0 45px / 88% 9px no-repeat;
+
+    filter: blur(4px);
+    opacity: 0.65;
+}
+
+/* Reveal and hide button. */
+.cosmereSpoilerToggle {
+    width: 100%;
+    max-width: 280px;
+    margin: 15px auto 0;
+    padding: 12px 16px;
+    background: transparent;
+    color: #D9B36A;
+    border: 1px solid #B9975B;
+    font-size: 14px;
+}
+
+/* Revealed spoiler description. */
+.cosmereSpoilerSection .cosmereSpoilerText {
+    margin: 15px 0;
+    color: #F1E5CB;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* Keep the warning readable on smaller screens. */
+@media (max-width: 768px) {
+
+    .cosmereSpoilerSection {
+        padding: 14px;
+    }
+
+    .cosmereSpoilerToggle {
+        max-width: 100%;
+    }
+
+}
+
+/* =====================================
+   COSMERE BOOK COMPLETION CHECKBOXES
+   ===================================== */
+
+/* Group the checkbox and View Details button. */
+.cosmereReadingActions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+/* Checkbox label. */
+.cosmereCompletionLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 12px;
+    color: #D6CEBC;
+    border: 1px solid #665438;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* The checkbox itself. */
+.cosmereCompletionCheckbox {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    flex-shrink: 0;
+    accent-color: #B9975B;
+    cursor: pointer;
+}
+
+/* Highlight completed books. */
+.cosmereCompletionLabel.isCompleted {
+    color: #D9B36A;
+    border-color: #B9975B;
+}
+
+/* Align the existing button with the checkbox. */
+.cosmereReadingActions .cosmereDetailsToggle {
+    margin: 0;
+}
+
+/* Keyboard accessibility. */
+.cosmereCompletionCheckbox:focus-visible {
+    outline: 2px solid #D9B36A;
+    outline-offset: 4px;
+}
+
+/* =====================================
+   COSMERE READING PROGRESS DASHBOARD
+   ===================================== */
+
+/* Dashboard container */
+.cosmereProgressCard {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 25px;
+    background: #1B201D;
+    border: 1px solid #665438;
+    border-radius: 14px;
+    text-align: left;
+}
+
+/* Title and percentage layout */
+.cosmereProgressTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Dashboard heading */
+.cosmereProgressCard h2 {
+    margin: 0;
+    color: #D9B36A;
+    font-size: 22px;
+}
+
+/* Shared percentages for every main progress dashboard. */
+.cosmereProgressTop > span {
+    color: #D9B36A;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* Progress bar */
+.cosmereProgressBar {
+    display: block;
+    width: 100%;
+    height: 14px;
+    overflow: hidden;
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 20px;
+    background: #343A32;
+}
+
+/* Background track in Chrome, Edge, and Safari */
+.cosmereProgressBar::-webkit-progress-bar {
+    background: #343A32;
+    border-radius: 20px;
+}
+
+/* Filled portion in Chrome, Edge, and Safari */
+.cosmereProgressBar::-webkit-progress-value {
+    background: #B9975B;
+    border-radius: 20px;
+    transition: width 0.3s ease;
+}
+
+/* Filled portion in Firefox */
+.cosmereProgressBar::-moz-progress-bar {
+    background: #B9975B;
+    border-radius: 20px;
+}
+
+/* Shared completed-work counts for every main dashboard. */
+.cosmereProgressCard > p {
+    max-width: none;
+    margin: 15px 0 0;
+    color: #D6CEBC;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+
+    .cosmereProgressCard {
+        padding: 18px;
+    }
+
+    .cosmereProgressCard h2 {
+        font-size: 18px;
+    }
+
+    .cosmereProgressTop > span {
+        font-size: 22px;
+    }
+
+}
+
+/* Compact progress panels for every series subcategory. */
+.cosmereSubProgress {
+    width: 100%;
+    max-width: 750px;
+    margin: 20px auto 30px;
+    padding: 18px 22px;
+    background: rgba(27, 32, 29, 0.88);
+    border: 1px solid #665438;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.cosmereSubProgress .cosmereProgressBar {
+    height: 10px;
+}
+
+.cosmereSubProgress p {
+    max-width: none;
+    margin: 12px 0 0;
+    color: #D6CEBC;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .cosmereSubProgress {
+        padding: 15px;
+    }
+
+    .cosmereSubProgress p {
+        font-size: 13px;
+    }
+}
+
+/* =====================================
+   COSMERE BOOK GALLERIES
+   ===================================== */
+
+/* Responsive and centered book gallery. */
+.cosmereGalleryGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 22px;
+    max-width: 1000px;
+    margin: 30px auto 45px;
+}
+
+/* Individual book card. */
+.cosmereGalleryCard {
+    flex: 0 1 210px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px;
+    background: #1B201D;
+    border: 1px solid #665438;
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* Book-cover wrapper prevents shrink-to-fit layout shifts. */
+.cosmereGalleryCover {
+    width: 100%;
+    max-width: 210px;
+}
+
+/* Book cover. */
+.cosmereGalleryCard img {
+    display: block;
+    width: 100%;
+    max-width: 210px;
+    aspect-ratio: 2 / 3;
+    margin: 0 auto 16px;
+    object-fit: cover;
+    border: 1px solid #B9975B;
+    border-radius: 6px;
+}
+
+/* Book title. */
+.cosmereGalleryCard h3 {
+    margin: 0 0 10px;
+    color: #D9B36A;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Publication information. */
+.cosmereGalleryCard .cosmereGalleryMeta {
+    margin: 0 0 12px;
+    color: #D6CEBC;
+    font-size: 13px;
+}
+
+/* Placeholder if a future book has no cover. */
+.cosmereGalleryCoverPlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 210px;
+    aspect-ratio: 2 / 3;
+    margin: 0 auto 16px;
+    background: #342A1B;
+    border: 1px solid #B9975B;
+    border-radius: 6px;
+    color: #D6CEBC;
+    font-size: 13px;
+}
+
+/* =====================================
+   REDUCED MOTION
+   ===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .heroTag,
+    .heroContent h1,
+    .heroSubtitle,
+    .heroButtons {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    button:hover {
+        transform: none;
+    }
+}
+
+/* =====================================
+   COSMERE GALLERY EXPANDABLE DETAILS
+   ===================================== */
+
+/* Group the checkbox and details button. */
+.cosmereGalleryActions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+/* Keep the details button compact. */
+.cosmereGalleryActions .cosmereDetailsToggle {
+    margin: 0;
+}
+
+/* Shared details area below each book gallery. */
+.cosmereGalleryDetailsHost {
+    width: 100%;
+    max-width: 850px;
+    margin: -15px auto 45px;
+    text-align: left;
+}
+
+/* Expanded panel fills its centered container. */
+.cosmereGalleryDetailsHost .cosmereDetailsPanel {
+    width: 100%;
+    min-width: 0;
+}
+
+/* Responsive layout. */
+@media (max-width: 768px) {
+
+    .cosmereGalleryDetailsHost {
+        margin-top: -10px;
+    }
+
+    .cosmereGalleryDetailsHost .cosmereDetailsPanel {
+        padding: 15px;
+    }
+
+}
+
+/* =====================================
+   STORMLIGHT MAIN NOVELS GALLERY
+   ===================================== */
+
+/* Fit all five novels in one row on wide desktops. */
+#stormlightNovelsGallery,
+#secretProjectsGallery {
+    max-width: 1160px;
+}
+
+/* Use a balanced 3 + 2 layout on smaller desktops. */
+@media (min-width: 769px) and (max-width: 1250px) {
+
+    #stormlightNovelsGallery,
+    #secretProjectsGallery {
+        max-width: 700px;
+    }
+
+}
+
+/* =====================================
+   FLOATING BACK TO TOP BUTTON
+   ===================================== */
+
+#backToTopButton {
+    position: fixed;
+    right: 25px;
+    bottom: max(25px, env(safe-area-inset-bottom));
+    z-index: 100;
+
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 12px 18px;
+
+    background: linear-gradient(135deg, #342A1B, #1C1C1A);
+    color: #D9B36A;
+    border: 1px solid #B9975B;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+/* Smaller button positioning on mobile. */
+@media (max-width: 768px) {
+    #backToTopButton {
+        right: 12px;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+}
+
+/* =====================================
+   COSMERE INTERACTIVE HOVER EFFECTS
+   ===================================== */
+
+/* Smooth animation for book cards and progress panels. */
+.cosmereGalleryCard,
+.cosmereReadingItem,
+.cosmereProgressCard,
+.cosmereSubProgress {
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Smooth golden glow around book covers. */
+.cosmereGalleryCard img,
+.cosmereReadingCover {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Apply hover effects only to devices with a mouse. */
+@media (hover: hover) and (pointer: fine) {
+
+    /* Book cards and reading-order entries. */
+    .cosmereGalleryCard:hover,
+    .cosmereReadingItem:hover {
+        position: relative;
+        z-index: 1;
+        transform: translateY(-6px);
+        border-color: #D9B36A;
+        box-shadow:
+            0 12px 28px rgba(0, 0, 0, 0.45),
+            0 0 16px rgba(185, 151, 91, 0.18);
+    }
+
+    /* Make book covers glow as well. */
+    .cosmereGalleryCard:hover img,
+    .cosmereReadingItem:hover .cosmereReadingCover {
+        border-color: #D9B36A;
+        box-shadow:
+            0 0 15px rgba(185, 151, 91, 0.4);
+    }
+
+    /* Gentler effect for reading-progress panels. */
+    .cosmereProgressCard:hover,
+    .cosmereSubProgress:hover {
+        transform: translateY(-3px);
+        border-color: #B9975B;
+        box-shadow:
+            0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+}
+
+/* Highlight book cards during keyboard navigation. */
+.cosmereGalleryCard:focus-within,
+.cosmereReadingItem:focus-within {
+    border-color: #D9B36A;
+    box-shadow:
+        0 0 16px rgba(185, 151, 91, 0.25);
+}
+
+/* Respect accessibility settings for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+    .cosmereGalleryCard:hover,
+    .cosmereReadingItem:hover,
+    .cosmereProgressCard:hover,
+    .cosmereSubProgress:hover {
+        transform: none;
+    }
+}
+
+/* =====================================
+   COSMERE READING ORDER SEARCH BAR
+   ===================================== */
+
+/* Center the search bar and its label. */
+.cosmereSearchContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto 35px;
+    padding: 0 15px;
+}
+
+/* Search label. */
+.cosmereSearchContainer label {
+    color: #D9B36A;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 19px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Search input field. */
+#cosmereBookSearch {
+    width: 100%;
+    max-width: 520px;
+    min-height: 52px;
+    padding: 14px 18px;
+
+    background: #1B201D;
+    color: #F1E5CB;
+
+    border: 1px solid #B9975B;
+    border-radius: 10px;
+
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Placeholder text. */
+#cosmereBookSearch::placeholder {
+    color: #AFA48E;
+    opacity: 1;
+}
+
+/* Golden glow when the search field is selected. */
+#cosmereBookSearch:focus {
+    outline: none;
+    border-color: #D9B36A;
+
+    box-shadow:
+        0 0 0 3px rgba(185, 151, 91, 0.15),
+        0 0 18px rgba(185, 151, 91, 0.25);
+}
+
+/* Smaller screens. */
+@media (max-width: 768px) {
+
+    .cosmereSearchContainer {
+        margin: 25px auto 30px;
+        padding: 0 10px;
+    }
+
+    .cosmereSearchContainer label {
+        font-size: 16px;
+    }
+
+    #cosmereBookSearch {
+        min-height: 48px;
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+}
+
+/* =====================================
+   COSMERE SEARCH RESULTS COUNTER
+   ===================================== */
+
+.cosmereSearchStatus {
+    width: fit-content;
+    max-width: 90%;
+
+    margin: 0 auto 25px;
+    padding: 10px 20px;
+
+    background: rgba(27, 32, 29, 0.9);
+    border: 1px solid #665438;
+    border-radius: 8px;
+
+    color: #D9B36A;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+
+    .cosmereSearchStatus {
+        max-width: 95%;
+        padding: 9px 14px;
+        font-size: 12px;
+    }
+
+}
+
+/* =====================================
+   ACCESSIBILITY AND SEARCH REFINEMENTS
+   ===================================== */
+
+.skipLink {
+    position: absolute;
+    top: -100px;
+    left: 15px;
+    z-index: 1000;
+    padding: 12px 18px;
+    background: #1B201D;
+    color: #F1E5CB;
+    border: 2px solid #D9B36A;
+    border-radius: 8px;
+}
+
+.skipLink:focus {
+    top: 12px;
+}
+
+/* The navigation heading receives focus programmatically. */
+h1:focus,
+#cosmereMenu h1:focus {
+    outline: none;
+}
+
+#cosmereBookSearch:focus-visible {
+    outline: 2px solid #F1E5CB;
+    outline-offset: 3px;
+}
+
+.cosmereSearchClear {
+    width: auto;
+    min-height: 36px;
+    max-width: none;
+    margin: 0;
+    padding: 7px 16px;
+    background: transparent;
+    color: #D9B36A;
+    border: 1px solid #665438;
+    font-size: 13px;
+}
+
+.cosmereSearchStatus[data-empty="true"] {
+    border-color: #B9975B;
+    color: #F1E5CB;
+}
+
+.cosmereSiteFooter {
+    padding: 14px 20px 22px;
+    background: rgba(12, 15, 15, 0.88);
+    border-top: 1px solid #665438;
+}
+
+.cosmereSiteFooter p {
+    max-width: 850px;
+    margin: 0 auto;
+    color: #BDB3A1;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .cosmereSearchClear {
+        font-size: 12px;
+    }
+
+    .cosmereSiteFooter p {
+        font-size: 11px;
+    }
+}
+
