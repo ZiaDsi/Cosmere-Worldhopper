@@ -1367,27 +1367,10 @@ h1:focus,
     color: #F1E5CB;
 }
 
-.cosmereSiteFooter {
-    padding: 14px 20px 22px;
-    background: rgba(12, 15, 15, 0.88);
-    border-top: 1px solid #665438;
-}
-
-.cosmereSiteFooter p {
-    max-width: 850px;
-    margin: 0 auto;
-    color: #BDB3A1;
-    font-size: 12px;
-    line-height: 1.7;
-}
-
 @media (max-width: 768px) {
     .cosmereSearchClear {
         font-size: 12px;
     }
 
-    .cosmereSiteFooter p {
-        font-size: 11px;
-    }
 }
 
