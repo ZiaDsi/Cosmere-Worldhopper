@@ -1,305 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cosmere Worldhopper is an unofficial reading companion for Brandon Sanderson's Cosmere. Explore books, reading orders, spoiler-protected descriptions, and track your reading progress.">
+    <meta name="description"
+        content="Cosmere Worldhopper is an unofficial reading companion for Brandon Sanderson's Cosmere. Explore books, reading orders, spoiler-protected descriptions, and track your reading progress.">
     <title>Cosmere Worldhopper | Unofficial Cosmere Reading Companion</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:wght@400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/jpeg" href="images/favicon.jpg">
 </head>
+
 <body>
     <a class="skipLink" href="#siteMain">Skip to main content</a>
+
+    <!-- =====================================
+         PERSISTENT TOP NAVIGATION
+         ===================================== -->
+
+    <header class="siteHeader">
+
+        <div class="siteHeaderInner">
+
+            <!-- Website Brand -->
+            <button type="button" class="siteBrand" onclick="goBack()"
+                aria-label="Cosmere Worldhopper - Return to Home">
+
+                <span class="siteBrandGold">Cosmere</span>
+                <span class="siteBrandLight">Worldhopper</span>
+
+            </button>
+
+            <!-- Primary Navigation -->
+            <nav class="siteNav" aria-label="Primary navigation">
+
+                <button type="button" class="siteNavButton" onclick="showPage('introduction')">
+                    Discover
+                </button>
+
+                <button type="button" class="siteNavButton" onclick="openCosmere()">
+                    Explore
+                </button>
+
+                <button type="button" class="siteNavButton" onclick="openCosmereGuide()">
+                    Reading Order
+                </button>
+
+            </nav>
+
+        </div>
+
+    </header>
+
     <main id="siteMain" tabindex="-1">
-    <!-- Homepage -->
-    <div id="mainMenu" class="heroPage">
-        <div class="heroOverlay">
-            <div class="heroContent">
-                <p class="heroTag">An Unofficial Cosmere Reading Companion</p>
-                <h1>Cosmere Worldhopper</h1>
-                <p class="heroSubtitle">
-                    Explore Brandon Sanderson's Cosmere, discover reading orders,
-                    and track your progress through the magical universe without spoilers.
-                </p>
 
-                <div class="cosmereHomeFeatures">
-                    <div class="cosmereHomeFeature">
-                        <h2>Discover</h2>
-                        <p>Explore the books and series of Brandon Sanderson's interconnected Cosmere universe.</p>
-                    </div>
-                    <div class="cosmereHomeFeature">
-                        <h2>Read</h2>
-                        <p>Choose your preferred reading order and enjoy spoiler-protected book descriptions.</p>
-                    </div>
-                    <div class="cosmereHomeFeature">
-                        <h2>Track</h2>
-                        <p>Mark books as completed and follow your reading progress across the Cosmere.</p>
-                    </div>
-                </div>
+        <!-- Homepage -->
+        <div id="mainMenu" class="heroPage">
+            <div class="heroOverlay">
+                <div class="heroContent">
+                    <p class="heroTag">An Unofficial Cosmere Reading Companion</p>
 
-                <div class="heroButtons">
-                    <button type="button" onclick="showPage('introduction')">Discover the Cosmere</button>
-                    <button type="button" onclick="openCosmere()">Explore the Books</button>
-                    <button type="button" onclick="openCosmereGuide()">Reading Orders &amp; Progress</button>
+                    <h1 class="cosmereHeroTitle">
+                        <span class="cosmereHeroTitleLight">Cosmere</span>
+                        <span class="cosmereHeroTitleGold">Worldhopper</span>
+                    </h1>
+
+                    <div class="cosmereHeroDivider" aria-hidden="true">
+                        <span class="cosmereHeroDividerLine"></span>
+                        <span class="cosmereHeroDividerDiamond">◆</span>
+                        <span class="cosmereHeroDividerLine"></span>
+                    </div>
+
+                    <p class="heroSubtitle">
+                        Explore Brandon Sanderson's Cosmere, discover reading orders,
+                        and track your progress through the magical universe without spoilers.
+                    </p>
+
+                    <!-- Homepage Navigation Buttons -->
+                    <div class="heroButtons">
+
+                        <button type="button" onclick="showPage('introduction')">
+                            Discover the Cosmere
+                        </button>
+
+                        <button type="button" onclick="openCosmere()">
+                            Explore the Books
+                        </button>
+
+                        <button type="button" onclick="openCosmereGuide()">
+                            Reading Orders &amp; Progress
+                        </button>
+
+                    </div>
+
+                    <!-- Homepage Feature Cards -->
+                    <div class="cosmereHomeFeatures">
+
+                        <!-- Discover -->
+                        <div class="cosmereHomeFeature">
+
+                            <svg class="cosmereHomeFeatureIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                focusable="false">
+                                <circle cx="12" cy="12" r="10" />
+                                <polygon points="16.2 7.8 13.5 13.5 7.8 16.2 10.5 10.5 16.2 7.8" />
+                            </svg>
+
+                            <h2>Discover</h2>
+
+                            <p>
+                                Explore the books and series of Brandon
+                                Sanderson's interconnected Cosmere universe.
+                            </p>
+
+                        </div>
+
+                        <!-- Read -->
+                        <div class="cosmereHomeFeature">
+
+                            <svg class="cosmereHomeFeatureIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                focusable="false">
+                                <path d="M15 12h-5" />
+                                <path d="M15 8h-5" />
+                                <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+                                <path d="M8 21h12a2 2 0 0 0 2-2v-1H7v1a2 2 0 0 1-2 2Z" />
+                                <path d="M9 17V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2h6" />
+                            </svg>
+
+                            <h2>Read</h2>
+
+                            <p>
+                                Choose your preferred reading order and
+                                enjoy spoiler-protected book descriptions.
+                            </p>
+
+                        </div>
+
+                        <!-- Track -->
+                        <div class="cosmereHomeFeature">
+
+                            <svg class="cosmereHomeFeatureIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                                focusable="false">
+                                <path d="M12 7v14" />
+                                <path
+                                    d="M3 18V5a2 2 0 0 1 2-2h3a4 4 0 0 1 4 4 4 4 0 0 1 4-4h3a2 2 0 0 1 2 2v13h-5a4 4 0 0 0-4 3 4 4 0 0 0-4-3H3z" />
+                            </svg>
+
+                            <h2>Track</h2>
+
+                            <p>
+                                Mark books as completed and follow your
+                                reading progress across the Cosmere.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Homepage Reading Progress -->
+                    <section class="homeJourney" aria-labelledby="homeJourneyHeading">
+
+                        <div class="homeJourneyTop">
+
+                            <h2 id="homeJourneyHeading">
+                                Your Cosmere Journey
+                            </h2>
+
+                            <div class="homeJourneyStats">
+                                <span id="homeCosmereProgressText" aria-live="polite">
+                                    0 of 25 works completed
+                                </span>
+
+                                <span aria-hidden="true">·</span>
+
+                                <span id="homeCosmereProgressPercentage">
+                                    0%
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <progress id="homeCosmereProgressBar" class="cosmereProgressBar" value="0" max="25"
+                            aria-label="Overall Cosmere reading progress">
+                        </progress>
+
+                    </section>
+
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Spoiler-free introduction -->
-    <div id="introduction" hidden>
-        <h1>Discover the Cosmere</h1>
-        <p>
-            The Cosmere is an interconnected fantasy universe created by author Brandon Sanderson.
-            It contains multiple worlds, each with its own history, cultures, characters, and magic systems.
-        </p>
-        <p>
-            Series such as Mistborn and The Stormlight Archive, alongside standalone novels like
-            Elantris and Warbreaker, all take place within this larger universe.
-        </p>
-        <p>
-            You don't need to understand every Cosmere connection before you begin reading.
-            Many of its stories are designed to be enjoyable on their own.
-        </p>
-        <p>
-            Cosmere Worldhopper is here to help you discover these books, follow a reading order
-            that suits you, avoid unwanted spoilers, and track your progress throughout your reading journey.
-        </p>
-        <button type="button" onclick="goBack()">Back to Home</button>
-    </div>
+        <!-- Spoiler-free introduction -->
 
-    <!-- Cosmere explorer -->
-    <div id="cosmereExplorer" hidden>
-        <div id="cosmereMenu">
-            <h1>The Cosmere</h1>
-            <p>
-                Explore Brandon Sanderson's interconnected fantasy universe,
-                featuring extraordinary worlds, unique magic systems, and unforgettable stories.
-            </p>
-            <div class="cosmereButtons">
-                <button type="button" onclick="showCosmerePage('mistbornPage')">Mistborn</button>
-                <button type="button" onclick="showCosmerePage('stormlightPage')">The Stormlight Archive</button>
-                <button type="button" onclick="showCosmerePage('standalonePage')">Standalone Works &amp; Other Worlds</button>
-                <button type="button" onclick="showCosmerePage('secretProjectsPage')">Cosmere Secret Projects</button>
-                <button type="button" onclick="openCosmereGuide()">Complete Reading Order</button>
+        <div id="introduction" hidden>
+
+            <!-- Back Navigation -->
+            <div class="cosmereBackRow">
+                <button type="button" onclick="goBack()">
+                    &larr; Back to Home
+                </button>
             </div>
-            <button type="button" onclick="goBack()">Back to Home</button>
+
+            <h1>Discover the Cosmere</h1>
+
+            <p>
+                The Cosmere is an interconnected fantasy universe created by author Brandon Sanderson.
+                It contains multiple worlds, each with its own history, cultures, characters, and magic systems.
+            </p>
+            <p>
+                Series such as Mistborn and The Stormlight Archive, alongside standalone novels like
+                Elantris and Warbreaker, all take place within this larger universe.
+            </p>
+            <p>
+                You don't need to understand every Cosmere connection before you begin reading.
+                Many of its stories are designed to be enjoyable on their own.
+            </p>
+            <p>
+                Cosmere Worldhopper is here to help you discover these books, follow a reading order
+                that suits you, avoid unwanted spoilers, and track your progress throughout your reading journey.
+            </p>
         </div>
 
-        <!-- Mistborn -->
-        <div id="mistbornPage" hidden>
-            <h1>Mistborn</h1>
-            <section class="cosmereProgressCard" aria-labelledby="mistbornProgressHeading">
-                <div class="cosmereProgressTop">
-                    <h2 id="mistbornProgressHeading">Your Mistborn Progress</h2>
-                    <span id="mistbornProgressPercentage">0%</span>
-                </div>
-                <progress id="mistbornProgressBar" class="cosmereProgressBar" value="0" max="8"
-                          aria-label="Completed Mistborn works"></progress>
-                <p id="mistbornProgressText" aria-live="polite">0 of 8 works completed</p>
-            </section>
-            <p>
-                Explore the world of Scadrial through the original Mistborn trilogy,
-                Era 2, and their related stories.
-            </p>
+        <!-- Cosmere explorer -->
+        <div id="cosmereExplorer" hidden>
 
-            <section aria-labelledby="mistbornEra1Heading">
-                <h2 id="mistbornEra1Heading">Mistborn Era 1 — The Original Trilogy</h2>
-                <div class="cosmereSubProgress">
-                    <progress id="mistbornEra1ProgressBar" class="cosmereProgressBar" value="0" max="3"
-                              aria-label="Mistborn Era 1 reading progress"></progress>
-                    <p id="mistbornEra1ProgressText" aria-live="polite">0 of 3 works completed</p>
-                </div>
-                <div id="mistbornEra1Gallery" class="cosmereGalleryGrid"></div>
-            </section>
+            <div id="cosmereMenu">
 
-            <section aria-labelledby="mistbornEra2Heading">
-                <h2 id="mistbornEra2Heading">Mistborn Era 2 — Wax &amp; Wayne</h2>
-                <div class="cosmereSubProgress">
-                    <progress id="mistbornEra2ProgressBar" class="cosmereProgressBar" value="0" max="4"
-                              aria-label="Mistborn Era 2 reading progress"></progress>
-                    <p id="mistbornEra2ProgressText" aria-live="polite">0 of 4 works completed</p>
+                <!-- Back Navigation -->
+                <div class="cosmereBackRow">
+                    <button type="button" onclick="goBack()">
+                        &larr; Back to Home
+                    </button>
                 </div>
-                <p>Discover the four novels of Mistborn Era 2, set in a later period of Scadrial's history.</p>
-                <div id="mistbornEra2Gallery" class="cosmereGalleryGrid"></div>
-            </section>
 
-            <section aria-labelledby="mistbornRelatedHeading">
-                <h2 id="mistbornRelatedHeading">Mistborn — Related Works</h2>
-                <div class="cosmereSubProgress">
-                    <progress id="mistbornRelatedProgressBar" class="cosmereProgressBar" value="0" max="1"
-                              aria-label="Mistborn related works reading progress"></progress>
-                    <p id="mistbornRelatedProgressText" aria-live="polite">0 of 1 works completed</p>
-                </div>
+                <h1>The Cosmere</h1>
+
                 <p>
-                    Explore additional stories connected to the Mistborn series. Check the Complete
-                    Reading Order before reading to avoid unwanted spoilers.
+                    Explore Brandon Sanderson's interconnected fantasy universe,
+                    featuring extraordinary worlds, unique magic systems, and unforgettable stories.
                 </p>
-                <div id="mistbornRelatedGallery" class="cosmereGalleryGrid"></div>
-            </section>
-            <button type="button" onclick="backToCosmereMenu()">Back to The Cosmere</button>
-        </div>
-
-        <!-- The Stormlight Archive -->
-        <div id="stormlightPage" hidden>
-            <h1>The Stormlight Archive</h1>
-            <section class="cosmereProgressCard" aria-labelledby="stormlightProgressHeading">
-                <div class="cosmereProgressTop">
-                    <h2 id="stormlightProgressHeading">Your Stormlight Progress</h2>
-                    <span id="stormlightProgressPercentage">0%</span>
+                <div class="cosmereButtons">
+                    <button type="button" onclick="showCosmerePage('mistbornPage')">Mistborn</button>
+                    <button type="button" onclick="showCosmerePage('stormlightPage')">The Stormlight Archive</button>
+                    <button type="button" onclick="showCosmerePage('standalonePage')">Standalone Works &amp; Other
+                        Worlds</button>
+                    <button type="button" onclick="showCosmerePage('secretProjectsPage')">Cosmere Secret
+                        Projects</button>
+                    <button type="button" onclick="openCosmereGuide()">Complete Reading Order</button>
                 </div>
-                <progress id="stormlightProgressBar" class="cosmereProgressBar" value="0" max="7"
-                          aria-label="Completed Stormlight Archive works"></progress>
-                <p id="stormlightProgressText" aria-live="polite">0 of 7 works completed</p>
-            </section>
-            <p>
-                Journey to Roshar, a world of powerful storms, ancient mysteries, and
-                extraordinary magic. Explore the novels and novellas of The Stormlight Archive.
-            </p>
-
-            <section aria-labelledby="stormlightNovelsHeading">
-                <h2 id="stormlightNovelsHeading">The Stormlight Archive — Main Novels</h2>
-                <div class="cosmereSubProgress">
-                    <progress id="stormlightNovelsProgressBar" class="cosmereProgressBar" value="0" max="5"
-                              aria-label="Stormlight main novels reading progress"></progress>
-                    <p id="stormlightNovelsProgressText" aria-live="polite">0 of 5 works completed</p>
-                </div>
-                <div id="stormlightNovelsGallery" class="cosmereGalleryGrid"></div>
-            </section>
-
-            <section aria-labelledby="stormlightNovellasHeading">
-                <h2 id="stormlightNovellasHeading">The Stormlight Archive — Novellas</h2>
-                <div class="cosmereSubProgress">
-                    <progress id="stormlightNovellasProgressBar" class="cosmereProgressBar" value="0" max="2"
-                              aria-label="Stormlight novellas reading progress"></progress>
-                    <p id="stormlightNovellasProgressText" aria-live="polite">0 of 2 works completed</p>
-                </div>
-                <div id="stormlightNovellasGallery" class="cosmereGalleryGrid"></div>
-            </section>
-
-            <button type="button" onclick="backToCosmereMenu()">Back to The Cosmere</button>
-        </div>
-
-        <!-- Standalone Works & Other Worlds -->
-        <div id="standalonePage" hidden>
-            <h1>Standalone Works &amp; Other Worlds</h1>
-            <section class="cosmereProgressCard" aria-labelledby="standaloneProgressHeading">
-                <div class="cosmereProgressTop">
-                    <h2 id="standaloneProgressHeading">Your Standalone Progress</h2>
-                    <span id="standaloneProgressPercentage">0%</span>
-                </div>
-                <progress id="standaloneProgressBar" class="cosmereProgressBar" value="0" max="5"
-                          aria-label="Completed standalone Cosmere works"></progress>
-                <p id="standaloneProgressText" aria-live="polite">0 of 5 works completed</p>
-            </section>
-            <p>
-                Discover more of Brandon Sanderson's Cosmere beyond Mistborn and The Stormlight Archive.
-                Explore independent novels, novellas, and illustrated stories across different worlds.
-            </p>
-
-            <section aria-labelledby="standaloneNovelsHeading">
-                <h2 id="standaloneNovelsHeading">Standalone Novels</h2>
-                <div class="cosmereSubProgress">
-                    <progress id="standaloneNovelsProgressBar" class="cosmereProgressBar" value="0" max="2"
-                              aria-label="Standalone novels reading progress"></progress>
-                    <p id="standaloneNovelsProgressText" aria-live="polite">0 of 2 works completed</p>
-                </div>
-                <div id="standaloneNovelsGallery" class="cosmereGalleryGrid"></div>
-            </section>
-
-            <section aria-labelledby="standaloneOtherHeading">
-                <h2 id="standaloneOtherHeading">Novellas &amp; Graphic Stories</h2>
-                <div class="cosmereSubProgress">
-                    <progress id="standaloneOtherProgressBar" class="cosmereProgressBar" value="0" max="3"
-                              aria-label="Novellas and graphic stories reading progress"></progress>
-                    <p id="standaloneOtherProgressText" aria-live="polite">0 of 3 works completed</p>
-                </div>
-                <div id="standaloneOtherGallery" class="cosmereGalleryGrid"></div>
-            </section>
-            <button type="button" onclick="backToCosmereMenu()">Back to The Cosmere</button>
-        </div>
-
-        <!-- Cosmere Secret Projects -->
-        <div id="secretProjectsPage" hidden>
-            <h1>Cosmere Secret Projects</h1>
-            <section class="cosmereProgressCard" aria-labelledby="secretProjectsProgressHeading">
-                <div class="cosmereProgressTop">
-                    <h2 id="secretProjectsProgressHeading">Your Secret Projects Progress</h2>
-                    <span id="secretProjectsProgressPercentage">0%</span>
-                </div>
-                <progress id="secretProjectsProgressBar" class="cosmereProgressBar" value="0" max="5"
-                          aria-label="Completed Secret Projects"></progress>
-                <p id="secretProjectsProgressText" aria-live="polite">0 of 5 works completed</p>
-            </section>
-            <p>
-                Discover Brandon Sanderson's Cosmere Secret Projects, featuring extraordinary worlds,
-                memorable characters, and unique adventures across the Cosmere.
-            </p>
-            <section aria-labelledby="secretProjectsHeading">
-                <h2 id="secretProjectsHeading">Explore the Secret Projects</h2>
-                <div id="secretProjectsGallery" class="cosmereGalleryGrid"></div>
-            </section>
-            <button type="button" onclick="backToCosmereMenu()">Back to The Cosmere</button>
-        </div>
-
-        <!-- Complete reading guide -->
-        <div id="cosmereGuidePage" hidden>
-            <h1>Complete Cosmere Reading Order</h1>
-            <p>Explore 25 selected Cosmere works in your preferred reading order.</p>
-            <section class="cosmereProgressCard" aria-labelledby="cosmereProgressHeading">
-                <div class="cosmereProgressTop">
-                    <h2 id="cosmereProgressHeading">Your Cosmere Progress</h2>
-                    <span id="cosmereProgressPercentage">0%</span>
-                </div>
-                <progress id="cosmereProgressBar" class="cosmereProgressBar" value="0" max="25"
-                          aria-label="Completed Cosmere books"></progress>
-                <p id="cosmereProgressText" aria-live="polite">0 of 25 books completed</p>
-            </section>
-            <div class="cosmereOrderSwitch">
-                <button type="button" id="suggestedOrderButton" onclick="renderCosmereReadingOrder('suggested')">
-                    Suggested Reading Order
-                </button>
-                <button type="button" id="publicationOrderButton" onclick="renderCosmereReadingOrder('publication')">
-                    Publication Order
-                </button>
             </div>
-            
-            <!-- COSMERE BOOK SEARCH -->
-            <div class="cosmereSearchContainer">
 
-                <label for="cosmereBookSearch">
-                    Search the Cosmere
-                </label>
+            <!-- Mistborn -->
+            <div id="mistbornPage" hidden>
 
-                <input
-                    type="search"
-                    id="cosmereBookSearch"
-                    placeholder="Search for a book..."
-                    autocomplete="off"
-                    aria-controls="cosmereReadingList"
-                >
-                <button type="button" id="clearCosmereBookSearch"
-                        class="cosmereSearchClear" hidden>Clear Search</button>
+                <!-- Back Navigation -->
+                <div class="cosmereBackRow">
+                    <button type="button" onclick="backToCosmereMenu()">
+                        &larr; Back to The Cosmere
+                    </button>
+                </div>
+
+                <h1>Mistborn</h1>
+
+                <section class="cosmereProgressCard" aria-labelledby="mistbornProgressHeading">
+                    <div class="cosmereProgressTop">
+                        <h2 id="mistbornProgressHeading">Your Mistborn Progress</h2>
+                        <span id="mistbornProgressPercentage">0%</span>
+                    </div>
+                    <progress id="mistbornProgressBar" class="cosmereProgressBar" value="0" max="8"
+                        aria-label="Completed Mistborn works"></progress>
+                    <p id="mistbornProgressText" aria-live="polite">0 of 8 works completed</p>
+                </section>
+                <p>
+                    Explore the world of Scadrial through the original Mistborn trilogy,
+                    Era 2, and their related stories.
+                </p>
+
+                <section aria-labelledby="mistbornEra1Heading">
+                    <h2 id="mistbornEra1Heading">Mistborn Era 1 — The Original Trilogy</h2>
+                    <div class="cosmereSubProgress">
+                        <progress id="mistbornEra1ProgressBar" class="cosmereProgressBar" value="0" max="3"
+                            aria-label="Mistborn Era 1 reading progress"></progress>
+                        <p id="mistbornEra1ProgressText" aria-live="polite">0 of 3 works completed</p>
+                    </div>
+                    <div id="mistbornEra1Gallery" class="cosmereGalleryGrid"></div>
+                </section>
+
+                <section aria-labelledby="mistbornEra2Heading">
+                    <h2 id="mistbornEra2Heading">Mistborn Era 2 — Wax &amp; Wayne</h2>
+                    <div class="cosmereSubProgress">
+                        <progress id="mistbornEra2ProgressBar" class="cosmereProgressBar" value="0" max="4"
+                            aria-label="Mistborn Era 2 reading progress"></progress>
+                        <p id="mistbornEra2ProgressText" aria-live="polite">0 of 4 works completed</p>
+                    </div>
+                    <p>Discover the four novels of Mistborn Era 2, set in a later period of Scadrial's history.</p>
+                    <div id="mistbornEra2Gallery" class="cosmereGalleryGrid"></div>
+                </section>
+
+                <section aria-labelledby="mistbornRelatedHeading">
+                    <h2 id="mistbornRelatedHeading">Mistborn — Related Works</h2>
+                    <div class="cosmereSubProgress">
+                        <progress id="mistbornRelatedProgressBar" class="cosmereProgressBar" value="0" max="1"
+                            aria-label="Mistborn related works reading progress"></progress>
+                        <p id="mistbornRelatedProgressText" aria-live="polite">0 of 1 works completed</p>
+                    </div>
+                    <p>
+                        Explore additional stories connected to the Mistborn series. Check the Complete
+                        Reading Order before reading to avoid unwanted spoilers.
+                    </p>
+                    <div id="mistbornRelatedGallery" class="cosmereGalleryGrid"></div>
+                </section>
+            </div>
+
+            <!-- The Stormlight Archive -->
+
+            <div id="stormlightPage" hidden>
+
+                <!-- Back Navigation -->
+                <div class="cosmereBackRow">
+                    <button type="button" onclick="backToCosmereMenu()">
+                        &larr; Back to The Cosmere
+                    </button>
+                </div>
+
+                <h1>The Stormlight Archive</h1>
+
+                <section class="cosmereProgressCard" aria-labelledby="stormlightProgressHeading">
+                    <div class="cosmereProgressTop">
+                        <h2 id="stormlightProgressHeading">Your Stormlight Progress</h2>
+                        <span id="stormlightProgressPercentage">0%</span>
+                    </div>
+                    <progress id="stormlightProgressBar" class="cosmereProgressBar" value="0" max="7"
+                        aria-label="Completed Stormlight Archive works"></progress>
+                    <p id="stormlightProgressText" aria-live="polite">0 of 7 works completed</p>
+                </section>
+                <p>
+                    Journey to Roshar, a world of powerful storms, ancient mysteries, and
+                    extraordinary magic. Explore the novels and novellas of The Stormlight Archive.
+                </p>
+
+                <section aria-labelledby="stormlightNovelsHeading">
+                    <h2 id="stormlightNovelsHeading">The Stormlight Archive — Main Novels</h2>
+                    <div class="cosmereSubProgress">
+                        <progress id="stormlightNovelsProgressBar" class="cosmereProgressBar" value="0" max="5"
+                            aria-label="Stormlight main novels reading progress"></progress>
+                        <p id="stormlightNovelsProgressText" aria-live="polite">0 of 5 works completed</p>
+                    </div>
+                    <div id="stormlightNovelsGallery" class="cosmereGalleryGrid"></div>
+                </section>
+
+                <section aria-labelledby="stormlightNovellasHeading">
+                    <h2 id="stormlightNovellasHeading">The Stormlight Archive — Novellas</h2>
+                    <div class="cosmereSubProgress">
+                        <progress id="stormlightNovellasProgressBar" class="cosmereProgressBar" value="0" max="2"
+                            aria-label="Stormlight novellas reading progress"></progress>
+                        <p id="stormlightNovellasProgressText" aria-live="polite">0 of 2 works completed</p>
+                    </div>
+                    <div id="stormlightNovellasGallery" class="cosmereGalleryGrid"></div>
+                </section>
 
             </div>
 
-            <!-- SEARCH RESULTS FEEDBACK -->
-            <p
-                id="cosmereSearchStatus"
-                class="cosmereSearchStatus"
-                role="status"
-                aria-live="polite"
-                hidden>
-            </p>
+            <!-- Standalone Works & Other Worlds -->
 
-            <!-- JavaScript generates all book entries from books.js. -->
-            <ol id="cosmereReadingList" class="cosmereReadingList"></ol>
-            <button type="button" onclick="backToCosmereMenu()">Back to The Cosmere</button>
+            <div id="standalonePage" hidden>
+
+                <!-- Back Navigation -->
+                <div class="cosmereBackRow">
+                    <button type="button" onclick="backToCosmereMenu()">
+                        &larr; Back to The Cosmere
+                    </button>
+                </div>
+
+                <h1>Standalone Works &amp; Other Worlds</h1>
+
+                <section class="cosmereProgressCard" aria-labelledby="standaloneProgressHeading">
+                    <div class="cosmereProgressTop">
+                        <h2 id="standaloneProgressHeading">Your Standalone Progress</h2>
+                        <span id="standaloneProgressPercentage">0%</span>
+                    </div>
+                    <progress id="standaloneProgressBar" class="cosmereProgressBar" value="0" max="5"
+                        aria-label="Completed standalone Cosmere works"></progress>
+                    <p id="standaloneProgressText" aria-live="polite">0 of 5 works completed</p>
+                </section>
+                <p>
+                    Discover more of Brandon Sanderson's Cosmere beyond Mistborn and The Stormlight Archive.
+                    Explore independent novels, novellas, and illustrated stories across different worlds.
+                </p>
+
+                <section aria-labelledby="standaloneNovelsHeading">
+                    <h2 id="standaloneNovelsHeading">Standalone Novels</h2>
+                    <div class="cosmereSubProgress">
+                        <progress id="standaloneNovelsProgressBar" class="cosmereProgressBar" value="0" max="2"
+                            aria-label="Standalone novels reading progress"></progress>
+                        <p id="standaloneNovelsProgressText" aria-live="polite">0 of 2 works completed</p>
+                    </div>
+                    <div id="standaloneNovelsGallery" class="cosmereGalleryGrid"></div>
+                </section>
+
+                <section aria-labelledby="standaloneOtherHeading">
+                    <h2 id="standaloneOtherHeading">Novellas &amp; Graphic Stories</h2>
+                    <div class="cosmereSubProgress">
+                        <progress id="standaloneOtherProgressBar" class="cosmereProgressBar" value="0" max="3"
+                            aria-label="Novellas and graphic stories reading progress"></progress>
+                        <p id="standaloneOtherProgressText" aria-live="polite">0 of 3 works completed</p>
+                    </div>
+                    <div id="standaloneOtherGallery" class="cosmereGalleryGrid"></div>
+                </section>
+            </div>
+
+            <!-- Cosmere Secret Projects -->
+
+            <div id="secretProjectsPage" hidden>
+
+                <!-- Back Navigation -->
+                <div class="cosmereBackRow">
+                    <button type="button" onclick="backToCosmereMenu()">
+                        &larr; Back to The Cosmere
+                    </button>
+                </div>
+
+                <h1>Cosmere Secret Projects</h1>
+
+                <section class="cosmereProgressCard" aria-labelledby="secretProjectsProgressHeading">
+                    <div class="cosmereProgressTop">
+                        <h2 id="secretProjectsProgressHeading">Your Secret Projects Progress</h2>
+                        <span id="secretProjectsProgressPercentage">0%</span>
+                    </div>
+                    <progress id="secretProjectsProgressBar" class="cosmereProgressBar" value="0" max="5"
+                        aria-label="Completed Secret Projects"></progress>
+                    <p id="secretProjectsProgressText" aria-live="polite">0 of 5 works completed</p>
+                </section>
+                <p>
+                    Discover Brandon Sanderson's Cosmere Secret Projects, featuring extraordinary worlds,
+                    memorable characters, and unique adventures across the Cosmere.
+                </p>
+                <section aria-labelledby="secretProjectsHeading">
+                    <h2 id="secretProjectsHeading">Explore the Secret Projects</h2>
+                    <div id="secretProjectsGallery" class="cosmereGalleryGrid"></div>
+                </section>
+            </div>
+
+            <!-- Complete reading guide -->
+
+            <div id="cosmereGuidePage" hidden>
+
+                <!-- Back Navigation -->
+                <div class="cosmereBackRow">
+                    <button type="button" onclick="backToCosmereMenu()">
+                        &larr; Back to The Cosmere
+                    </button>
+                </div>
+
+                <h1>Complete Cosmere Reading Order</h1>
+
+                <p>Explore 25 selected Cosmere works in your preferred reading order.</p>
+                <section class="cosmereProgressCard" aria-labelledby="cosmereProgressHeading">
+                    <div class="cosmereProgressTop">
+                        <h2 id="cosmereProgressHeading">Your Cosmere Progress</h2>
+                        <span id="cosmereProgressPercentage">0%</span>
+                    </div>
+                    <progress id="cosmereProgressBar" class="cosmereProgressBar" value="0" max="25"
+                        aria-label="Completed Cosmere books"></progress>
+                    <p id="cosmereProgressText" aria-live="polite">0 of 25 books completed</p>
+                </section>
+                <div class="cosmereOrderSwitch">
+                    <button type="button" id="suggestedOrderButton" onclick="renderCosmereReadingOrder('suggested')">
+                        Suggested Reading Order
+                    </button>
+                    <button type="button" id="publicationOrderButton"
+                        onclick="renderCosmereReadingOrder('publication')">
+                        Publication Order
+                    </button>
+                </div>
+
+                <!-- COSMERE BOOK SEARCH -->
+                <div class="cosmereSearchContainer">
+
+                    <label for="cosmereBookSearch">
+                        Search the Cosmere
+                    </label>
+
+                    <input type="search" id="cosmereBookSearch" placeholder="Search for a book..." autocomplete="off"
+                        aria-controls="cosmereReadingList">
+                    <button type="button" id="clearCosmereBookSearch" class="cosmereSearchClear" hidden>Clear
+                        Search</button>
+
+                </div>
+
+                <!-- SEARCH RESULTS FEEDBACK -->
+                <p id="cosmereSearchStatus" class="cosmereSearchStatus" role="status" aria-live="polite" hidden>
+                </p>
+
+                <!-- JavaScript generates all book entries from books.js. -->
+                <ol id="cosmereReadingList" class="cosmereReadingList"></ol>
+            </div>
         </div>
-    </div>
 
     </main>
 
@@ -307,4 +510,5 @@
     <script src="books.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

@@ -345,41 +345,41 @@ const COSMERE_DESCRIPTIONS = {
     // STANDALONE WORKS
 
     elantris:
-    "Once a magnificent city of living gods, Elantris " +
-    "was a place where ordinary people could be transformed " +
-    "into powerful beings blessed with extraordinary magic. " +
-    "But ten years ago, an unexplained catastrophe destroyed " +
-    "its glory, leaving its inhabitants cursed and its " +
-    "magic broken. When Prince Raoden suddenly suffers " +
-    "the same mysterious transformation, he is secretly " +
-    "exiled to the ruined city, where suffering and " +
-    "despair have replaced its former splendor. " +
-    "Meanwhile, Princess Sarene arrives in the kingdom " +
-    "of Arelon for an arranged marriage, only to become " +
-    "entangled in dangerous political struggles. " +
-    "As a determined religious missionary named Hrathen " +
-    "works to convert the kingdom, the futures of " +
-    "these three individuals become connected to " +
-    "the mystery of Elantris and the forgotten " +
-    "power that once sustained it.",
+        "Once a magnificent city of living gods, Elantris " +
+        "was a place where ordinary people could be transformed " +
+        "into powerful beings blessed with extraordinary magic. " +
+        "But ten years ago, an unexplained catastrophe destroyed " +
+        "its glory, leaving its inhabitants cursed and its " +
+        "magic broken. When Prince Raoden suddenly suffers " +
+        "the same mysterious transformation, he is secretly " +
+        "exiled to the ruined city, where suffering and " +
+        "despair have replaced its former splendor. " +
+        "Meanwhile, Princess Sarene arrives in the kingdom " +
+        "of Arelon for an arranged marriage, only to become " +
+        "entangled in dangerous political struggles. " +
+        "As a determined religious missionary named Hrathen " +
+        "works to convert the kingdom, the futures of " +
+        "these three individuals become connected to " +
+        "the mystery of Elantris and the forgotten " +
+        "power that once sustained it.",
 
     the_emperors_soul:
-    "Shai is a brilliant Forger, a master of a magical " +
-    "art capable of rewriting an object's history " +
-    "to transform it into something entirely different. " +
-    "But after being caught attempting to steal " +
-    "a priceless imperial artifact, she faces execution. " +
-    "Her only chance of survival comes from an " +
-    "extraordinary offer: the emperor has been left " +
-    "unconscious by an assassination attempt, and " +
-    "his advisers need Shai to create a new soul " +
-    "for him before the empire descends into chaos. " +
-    "Given fewer than one hundred days to accomplish " +
-    "the impossible, Shai must study the emperor's " +
-    "life, uncover the nature of his identity, " +
-    "and navigate the schemes of those holding " +
-    "her prisoner, all while searching for " +
-    "a way to regain her freedom.",
+        "Shai is a brilliant Forger, a master of a magical " +
+        "art capable of rewriting an object's history " +
+        "to transform it into something entirely different. " +
+        "But after being caught attempting to steal " +
+        "a priceless imperial artifact, she faces execution. " +
+        "Her only chance of survival comes from an " +
+        "extraordinary offer: the emperor has been left " +
+        "unconscious by an assassination attempt, and " +
+        "his advisers need Shai to create a new soul " +
+        "for him before the empire descends into chaos. " +
+        "Given fewer than one hundred days to accomplish " +
+        "the impossible, Shai must study the emperor's " +
+        "life, uncover the nature of his identity, " +
+        "and navigate the schemes of those holding " +
+        "her prisoner, all while searching for " +
+        "a way to regain her freedom.",
 
     warbreaker:
         "In a world where color and human Breath fuel " +
@@ -461,7 +461,7 @@ const COSMERE_DESCRIPTIONS = {
         "and the mysteries surrounding the ancient " +
         "Knights Radiant become increasingly important " +
         "to the fate of Roshar.",
-    
+
     words_of_radiance:
         "After surviving the horrors of bridge duty, Kaladin " +
         "and the men of Bridge Four have finally escaped " +
@@ -512,7 +512,7 @@ const COSMERE_DESCRIPTIONS = {
         "she must begin to understand what it " +
         "truly means to become a Knight Radiant " +
         "in a world that is rapidly changing.",
-    
+
     oathbringer:
         "The Battle of Narak has ended, but victory has come " +
         "at a terrible price. The Parshendi have summoned " +
@@ -537,7 +537,7 @@ const COSMERE_DESCRIPTIONS = {
         "lost orders, Dalinar must confront the consequences " +
         "of his past while attempting to unite a divided " +
         "world against an approaching catastrophe.",
-    
+
     dawnshard:
         "Following the devastating confrontation at " +
         "Thaylen Field, Dalinar Kholin's coalition and " +
@@ -564,7 +564,7 @@ const COSMERE_DESCRIPTIONS = {
         "the expedition must confront the dangers " +
         "surrounding its ancient secrets, while Rysn " +
         "searches for a way to save Chiri-Chiri.",
-    
+
     rhythm_of_war:
         "A year has passed since the Battle of Thaylen Field, " +
         "where Dalinar Kholin rejected Odium's attempt to " +
@@ -662,7 +662,7 @@ const COSMERE_DESCRIPTIONS = {
         "and Marasi, Wax must uncover the force behind " +
         "the violence before the fragile stability of " +
         "Scadrial's rapidly changing society collapses.",
-    
+
     the_bands_of_mourning:
         "Following the devastating events in Elendel, " +
         "Waxillium Ladrian struggles with the revelation " +
@@ -682,7 +682,7 @@ const COSMERE_DESCRIPTIONS = {
         "investigate their possible location while " +
         "confronting the growing influence of the Set " +
         "and his complicated relationship with Harmony.",
-    
+
     secret_history:
         "Kelsier was killed by the Lord Ruler, but his story " +
         "did not end with his death. Refusing to pass into " +

@@ -61,7 +61,7 @@ p {
 }
 
 /* =====================================
-   SHARED BUTTONS AND PAGE LAYOUT
+   SHARED BUTTONS — DARK GREEN & GOLD
    ===================================== */
 
 button {
@@ -70,24 +70,44 @@ button {
     max-width: 360px;
     margin: 15px auto;
     padding: 18px;
-    background: linear-gradient(135deg, #342A1B, #1C1C1A);
+
+    /* Dark forest-green background */
+    background: #1B201D;
+
+    /* Warm ivory text and antique gold border */
     color: #F1E5CB;
     border: 1px solid #B9975B;
-    border-radius: 8px;
+    border-radius: 6px;
+
+    /* Preserve our original font */
     font-family: 'Lora', Georgia, serif;
     font-size: 17px;
+
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease,
-                transform 0.3s ease, box-shadow 0.3s ease,
-                border-color 0.3s ease;
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-button:hover {
-    background: #B9975B;
-    color: #101315;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px #00000080;
+/* Subtle hover effects for mouse users */
+@media (hover: hover) and (pointer: fine) {
+    button:hover {
+        background: #263329;
+        color: #F1E5CB;
+        border-color: #D9B36A;
+
+        transform: translateY(-3px);
+
+        box-shadow:
+            0 8px 24px rgba(0, 0, 0, 0.4),
+            0 0 14px rgba(185, 151, 91, 0.16);
+    }
 }
+
 
 button:focus-visible {
     outline: 3px solid #F1E5CB;
@@ -122,7 +142,8 @@ button:focus-visible {
 }
 
 .heroContent {
-    max-width: 900px;
+    width: 100%;
+    max-width: 1120px;
     padding: 40px 20px;
     text-align: center;
 }
@@ -136,15 +157,81 @@ button:focus-visible {
     text-transform: uppercase;
 }
 
-.heroContent h1 {
-    margin-bottom: 20px;
-    color: #D9B36A;
-    font-size: clamp(32px, 5vw, 72px);
-    font-weight: 700;
+
+/* =====================================
+   HOMEPAGE — CINEMATIC TITLE
+   ===================================== */
+
+.heroContent h1.cosmereHeroTitle {
+    margin: 0 auto 26px;
+    color: #F1E5CB;
+
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: clamp(32px, 5vw, 76px);
+    font-weight: 600;
+    line-height: 1.2;
+
     letter-spacing: 2px;
-    text-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    text-wrap: balance;
     overflow-wrap: anywhere;
+
+    text-shadow: 0 6px 22px rgba(0, 0, 0, 0.55);
 }
+
+.cosmereHeroTitleLight {
+    color: #F1E5CB;
+}
+
+.cosmereHeroTitleGold {
+    color: #D9B36A;
+}
+
+/* Decorative lines and gold diamond */
+
+.cosmereHeroDivider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+    width: 75%;
+    max-width: 360px;
+
+    margin: 0 auto 30px;
+}
+
+.cosmereHeroDividerLine {
+    flex: 1;
+    height: 1px;
+
+    background: linear-gradient(90deg,
+            transparent,
+            #B9975B,
+            transparent);
+}
+
+.cosmereHeroDividerDiamond {
+    color: #D9B36A;
+    font-size: 12px;
+    line-height: 1;
+}
+
+/* Match the original entrance animation */
+
+.cosmereHeroDivider {
+    opacity: 0;
+    animation: heroFadeUp 0.5s ease-out 0.35s forwards;
+}
+
+/* Respect reduced motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    .cosmereHeroDivider {
+        animation: none;
+        opacity: 1;
+    }
+}
+
 
 .heroSubtitle {
     max-width: 760px;
@@ -154,18 +241,37 @@ button:focus-visible {
     line-height: 1.9;
 }
 
+
+/* =====================================
+   HOMEPAGE NAVIGATION BUTTONS
+   ===================================== */
+
 .heroButtons {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    gap: 12px;
 }
 
 .heroButtons button {
-    min-width: 240px;
-    padding: 18px 28px;
-    font-size: 20px;
+    width: auto;
+    min-width: 215px;
+    max-width: none;
+    min-height: 46px;
+
+    margin: 0;
+    padding: 13px 22px;
+
+    font-family: 'Lora', Georgia, serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.5px;
+
+    white-space: normal;
 }
+
 
 /* =====================================
    HOMEPAGE ENTRANCE ANIMATION
@@ -176,6 +282,7 @@ button:focus-visible {
         opacity: 0;
         transform: translateY(25px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -214,36 +321,68 @@ button:focus-visible {
 .cosmereHomeFeatures {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 15px;
-    max-width: 850px;
-    margin: 0 auto 35px;
+    gap: 18px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 36px auto 0;
 }
 
-/* Individual feature cards. */
 .cosmereHomeFeature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
     min-width: 0;
-    padding: 20px 15px;
-    background: rgba(27, 32, 29, 0.88);
+    min-height: 168px;
+
+    padding: 20px 22px;
+
+    background: #181D1A;
     border: 1px solid #665438;
-    border-radius: 12px;
+    border-radius: 7px;
+
     text-align: center;
+}
+
+/* Gold icons above each feature heading */
+.cosmereHomeFeatureIcon {
+    display: block;
+
+    width: 25px;
+    height: 25px;
+
+    flex-shrink: 0;
+    margin-bottom: 10px;
+
+    color: #D9B36A;
 }
 
 /* Feature headings. */
 .cosmereHomeFeature h2 {
-    margin: 0 0 12px;
+    margin: 0 0 8px;
+
     color: #D9B36A;
+
+    /* Preserve our original heading font */
     font-family: 'Cinzel', Georgia, serif;
     font-size: 18px;
+    font-weight: 700;
+
+    line-height: 1.3;
 }
 
 /* Feature descriptions. */
 .cosmereHomeFeature p {
-    max-width: none;
+    max-width: 280px;
     margin: 0;
+
+    /* Preserve our original body font */
+    font-family: 'Lora', Georgia, serif;
     color: #D6CEBC;
+
     font-size: 14px;
-    line-height: 1.7;
+    line-height: 1.55;
 }
 
 /* Responsive layout for mobile devices. */
@@ -298,11 +437,11 @@ button:focus-visible {
 @media (hover: hover) {
     .cosmereButtons button:hover {
         transform: translateY(-6px);
-        background: linear-gradient(145deg, #493821, #23241E);
+        background: #28342D;
         color: #F1E5CB;
         border-color: #D9B36A;
         box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5),
-                    0 0 18px rgba(185, 151, 91, 0.2);
+            0 0 18px rgba(185, 151, 91, 0.2);
     }
 }
 
@@ -317,7 +456,7 @@ button:focus-visible {
     }
 
     .cosmereButtons button,
-    #cosmereMenu > button {
+    #cosmereMenu>button {
         flex: none;
         width: 100%;
         max-width: 320px;
@@ -332,7 +471,7 @@ button:focus-visible {
    ===================================== */
 
 @media (max-width: 768px) {
- 
+
     /* =====================================
     MOBILE BACKGROUND 
     ===================================== */
@@ -353,10 +492,8 @@ button:focus-visible {
         pointer-events: none;
 
         background-image:
-            linear-gradient(
-                rgba(7, 10, 14, 0.72),
-                rgba(7, 10, 14, 0.78)
-            ),
+            linear-gradient(rgba(7, 10, 14, 0.72),
+                rgba(7, 10, 14, 0.78)),
             url("images/main_bg.jpg");
 
         background-size: cover;
@@ -442,7 +579,7 @@ button:focus-visible {
     }
 
     /* Introduction paragraphs */
-    #introduction > p {
+    #introduction>p {
         margin: 0 auto 35px;
         font-size: 16px;
         line-height: 1.7;
@@ -714,12 +851,9 @@ button:focus-visible {
     border-radius: 8px;
 
     background:
-        linear-gradient(#665438, #665438)
-            0 5px / 95% 9px no-repeat,
-        linear-gradient(#665438, #665438)
-            0 25px / 80% 9px no-repeat,
-        linear-gradient(#665438, #665438)
-            0 45px / 88% 9px no-repeat;
+        linear-gradient(#665438, #665438) 0 5px / 95% 9px no-repeat,
+        linear-gradient(#665438, #665438) 0 25px / 80% 9px no-repeat,
+        linear-gradient(#665438, #665438) 0 45px / 88% 9px no-repeat;
 
     filter: blur(4px);
     opacity: 0.65;
@@ -844,7 +978,7 @@ button:focus-visible {
 }
 
 /* Shared percentages for every main progress dashboard. */
-.cosmereProgressTop > span {
+.cosmereProgressTop>span {
     color: #D9B36A;
     font-family: 'Cinzel', Georgia, serif;
     font-size: 26px;
@@ -884,7 +1018,7 @@ button:focus-visible {
 }
 
 /* Shared completed-work counts for every main dashboard. */
-.cosmereProgressCard > p {
+.cosmereProgressCard>p {
     max-width: none;
     margin: 15px 0 0;
     color: #D6CEBC;
@@ -904,7 +1038,7 @@ button:focus-visible {
         font-size: 18px;
     }
 
-    .cosmereProgressTop > span {
+    .cosmereProgressTop>span {
         font-size: 22px;
     }
 
@@ -1028,7 +1162,10 @@ button:focus-visible {
    ===================================== */
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+
+    *,
+    *::before,
+    *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
@@ -1217,6 +1354,7 @@ button:focus-visible {
 
 /* Respect accessibility settings for reduced motion. */
 @media (prefers-reduced-motion: reduce) {
+
     .cosmereGalleryCard:hover,
     .cosmereReadingItem:hover,
     .cosmereProgressCard:hover,
@@ -1399,3 +1537,588 @@ h1:focus,
 
 }
 
+
+/* ==========================================
+   GOLDEN HOVER GLOW — BUTTONS AND CARDS
+   ========================================== */
+
+/* Smooth transitions for homepage feature cards */
+.cosmereHomeFeature {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Apply hover effects only on devices with a mouse */
+@media (hover: hover) and (pointer: fine) {
+
+    /* Golden glow for all buttons */
+    button:hover,
+    .cosmereButtons button:hover {
+        border-color: #E5BE70;
+
+        box-shadow:
+            0 0 0 1px rgba(229, 190, 112, 0.35),
+            0 0 16px rgba(217, 179, 106, 0.40),
+            0 0 32px rgba(217, 179, 106, 0.16),
+            0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Dark green background on hover */
+    button:not([aria-pressed="true"]):hover,
+    .cosmereButtons button:hover {
+        background: #263329;
+    }
+
+    /* Golden glow for feature cards and book cards */
+    .cosmereGalleryCard:hover,
+    .cosmereReadingItem:hover {
+        border-color: #E5BE70;
+
+        box-shadow:
+            0 0 0 1px rgba(229, 190, 112, 0.35),
+            0 0 18px rgba(217, 179, 106, 0.35),
+            0 10px 26px rgba(0, 0, 0, 0.40);
+
+        transform: translateY(-3px);
+    }
+}
+
+/* Keep keyboard focus clearly visible */
+button:focus-visible {
+    border-color: #E5BE70;
+    box-shadow: 0 0 18px rgba(217, 179, 106, 0.35);
+}
+
+/* =====================================
+   HOMEPAGE — YOUR COSMERE JOURNEY
+   ===================================== */
+
+.homeJourney {
+    width: 100%;
+    max-width: 520px;
+
+    margin: 36px auto 0;
+    padding: 16px 18px;
+
+    background: #181D1A;
+    border: 1px solid #665438;
+    border-radius: 7px;
+
+    text-align: left;
+}
+
+.homeJourneyTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    gap: 8px 14px;
+    margin-bottom: 10px;
+}
+
+.homeJourney h2 {
+    margin: 0;
+
+    color: #F1E5CB;
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+}
+
+.homeJourneyStats {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    color: #D6CEBC;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+#homeCosmereProgressPercentage {
+    color: #D9B36A;
+    font-weight: 600;
+}
+
+.homeJourney .cosmereProgressBar {
+    height: 7px;
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 480px) {
+
+    .homeJourney {
+        padding: 14px;
+        margin-top: 28px;
+    }
+
+    .homeJourney h2 {
+        font-size: 12px;
+    }
+
+    .homeJourneyStats {
+        font-size: 11px;
+    }
+
+}
+
+/* ==========================================
+   HOMEPAGE FEATURE CARDS — STATIC GOLDEN GLOW
+   ========================================== */
+
+/* Discover, Read, and Track glow without moving */
+@media (hover: hover) and (pointer: fine) {
+
+    .cosmereHomeFeature:hover {
+        /* Brighter golden outline */
+        border-color: #E5BE70;
+
+        /* Soft golden glow around the edges */
+        box-shadow:
+            0 0 0 1px rgba(229, 190, 112, 0.35),
+            0 0 16px rgba(217, 179, 106, 0.40),
+            0 0 32px rgba(217, 179, 106, 0.16);
+
+        /* No lifting or movement */
+        transform: none;
+    }
+
+}
+
+/* ==========================================
+   COSMERE WORLDHOPPER — TOP NAVIGATION
+   ========================================== */
+
+.siteHeader {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+
+    background: rgba(14, 18, 17, 0.97);
+
+    border-bottom: 1px solid #51452F;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Navigation content container */
+
+.siteHeaderInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: 1120px;
+    min-height: 58px;
+
+    margin: 0 auto;
+    padding: 0 20px;
+
+    gap: 20px;
+}
+
+/* Override global button dimensions */
+
+.siteHeader button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+    max-width: none;
+    min-height: 44px;
+
+    margin: 0;
+    padding: 8px 12px;
+
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    color: #D6CEBC;
+
+    transform: none;
+    box-shadow: none;
+}
+
+/* Website brand */
+
+
+.siteHeader .siteBrand {
+    gap: 5px;
+
+    /* Equal space around the website name */
+    padding: 8px 16px;
+
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 15px;
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+
+.siteBrandGold {
+    color: #D9B36A;
+}
+
+.siteBrandLight {
+    color: #F1E5CB;
+}
+
+/* Right-side navigation */
+
+.siteNav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+}
+
+/* Navigation text */
+
+.siteHeader .siteNavButton {
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 12px;
+    font-weight: 600;
+
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Golden hover effect */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .siteHeader button:hover {
+        background: #1B201D;
+
+        border-color: #B9975B;
+
+        color: #D9B36A;
+
+        transform: none;
+
+        box-shadow:
+            0 0 12px rgba(217, 179, 106, 0.22);
+    }
+
+}
+
+/* Keyboard accessibility */
+
+.siteHeader button:focus-visible {
+    outline: 2px solid #D9B36A;
+    outline-offset: 2px;
+}
+
+/* =====================================
+   MOBILE TOP NAVIGATION
+   ===================================== */
+
+@media (max-width: 700px) {
+
+    .siteHeaderInner {
+        flex-direction: column;
+        justify-content: center;
+
+        min-height: 0;
+
+        padding: 6px 10px;
+        gap: 2px;
+    }
+
+    .siteHeader .siteBrand {
+        min-height: 34px;
+        padding: 6px 12px;
+
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+
+    .siteNav {
+        width: 100%;
+        justify-content: center;
+
+        gap: 3px;
+    }
+
+    .siteHeader .siteNavButton {
+        min-height: 40px;
+        padding: 7px 6px;
+
+        font-size: 11px;
+        letter-spacing: 0.3px;
+    }
+
+}
+
+/* Keep the homepage height balanced
+   now that the navigation takes up space. */
+
+#mainMenu.heroPage,
+#mainMenu .heroOverlay {
+    min-height: calc(100vh - 58px);
+    min-height: calc(100svh - 58px);
+}
+
+@media (max-width: 700px) {
+
+    #mainMenu.heroPage,
+    #mainMenu .heroOverlay {
+        min-height: calc(100vh - 92px);
+        min-height: calc(100svh - 92px);
+    }
+
+}
+
+/* ==========================================
+   HOMEPAGE JOURNEY — STATIC GOLDEN GLOW
+   ========================================== */
+
+/* Smooth glow transition without movement */
+.homeJourney {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Golden outline for mouse users */
+@media (hover: hover) and (pointer: fine) {
+
+    .homeJourney:hover {
+
+        /* Bright golden border */
+        border-color: #E5BE70;
+
+        /* Soft golden glow around the edges */
+        box-shadow:
+            0 0 0 1px rgba(229, 190, 112, 0.35),
+            0 0 16px rgba(217, 179, 106, 0.40),
+            0 0 32px rgba(217, 179, 106, 0.16);
+
+    }
+
+}
+
+/* ==========================================
+   MOBILE NAVIGATION — GOLDEN TOUCH EFFECT
+   ========================================== */
+
+/* Remove the browser's default blue tap highlight
+   and prevent accidental text selection. */
+.siteHeader button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Golden pressed effect on touchscreen devices */
+@media (hover: none) and (pointer: coarse) {
+
+    .siteHeader button:active {
+        background: #1B201D;
+        border-color: #E5BE70;
+        color: #D9B36A;
+
+        box-shadow:
+            0 0 0 1px rgba(229, 190, 112, 0.35),
+            0 0 12px rgba(217, 179, 106, 0.35);
+
+        transform: none;
+    }
+
+}
+
+/* ==========================================
+   COSMERE — TOP BACK NAVIGATION
+   ========================================== */
+
+/* Align the back button with the main content */
+.cosmereBackRow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto 30px;
+}
+
+/* Compact back button */
+.cosmereBackRow button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+    max-width: 100%;
+    min-height: 42px;
+
+    margin: 0;
+    padding: 10px 16px;
+
+    background: #1B201D;
+    border: 1px solid #B9975B;
+    border-radius: 6px;
+
+    color: #F1E5CB;
+
+    /* Preserve the original website font */
+    font-family: 'Lora', Georgia, serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .cosmereBackRow {
+        margin-bottom: 24px;
+    }
+
+    .cosmereBackRow button {
+        padding: 9px 13px;
+        font-size: 12px;
+    }
+}
+
+/* ==========================================
+   STEP 7 — CIRCULAR BACK TO TOP BUTTON
+   ========================================== */
+
+#backToTopButton {
+    position: fixed;
+
+    right: calc(24px + env(safe-area-inset-right, 0px));
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+
+    z-index: 1100;
+
+    /* Perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    min-height: 52px;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+
+    border-radius: 50%;
+
+    /* Original Cosmere colors */
+    background: #1B201D;
+    border: 1px solid #B9975B;
+    color: #D9B36A;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.45);
+
+    cursor: pointer;
+
+    transform: none;
+
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Center the SVG arrow */
+#backToTopButton svg {
+    display: block;
+
+    width: 22px;
+    height: 22px;
+
+    flex-shrink: 0;
+}
+
+/* Preserve the existing hidden behavior */
+#backToTopButton[hidden] {
+    display: none !important;
+}
+
+/* Desktop golden hover */
+@media (hover: hover) and (pointer: fine) {
+
+    #backToTopButton:hover {
+        background: #263329;
+        border-color: #E5BE70;
+        color: #E5BE70;
+
+        box-shadow:
+            0 0 0 1px rgba(229, 190, 112, 0.35),
+            0 0 16px rgba(217, 179, 106, 0.40),
+            0 0 32px rgba(217, 179, 106, 0.16);
+
+        transform: none;
+    }
+
+}
+
+/* Keyboard accessibility */
+#backToTopButton:focus-visible {
+    outline: 2px solid #E5BE70;
+    outline-offset: 4px;
+}
+
+/* Mobile dimensions */
+@media (max-width: 768px) {
+
+    #backToTopButton {
+        right: calc(14px + env(safe-area-inset-right, 0px));
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+        min-height: 46px;
+    }
+
+    #backToTopButton svg {
+        width: 20px;
+        height: 20px;
+    }
+
+}
+
+/* Golden pressed effect on mobile */
+@media (hover: none) and (pointer: coarse) {
+
+    #backToTopButton:active {
+        background: #263329;
+        border-color: #E5BE70;
+        color: #E5BE70;
+
+        box-shadow:
+            0 0 14px rgba(217, 179, 106, 0.35);
+
+        transform: none;
+    }
+
+}

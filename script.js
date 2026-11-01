@@ -18,25 +18,39 @@ const COSMERE_PROGRESS_KEY = "fantasyworldguide_cosmere_progress";
 // A series may be a single name or an array, with an optional book type.
 const COSMERE_SECTIONS = {
     mistbornPage: [
-        { galleryId: "mistbornEra1Gallery", progressBarId: "mistbornEra1ProgressBar",
-          progressTextId: "mistbornEra1ProgressText", series: ["Mistborn Era 1"] },
-        { galleryId: "mistbornEra2Gallery", progressBarId: "mistbornEra2ProgressBar",
-          progressTextId: "mistbornEra2ProgressText", series: ["Mistborn Era 2"] },
-        { galleryId: "mistbornRelatedGallery", progressBarId: "mistbornRelatedProgressBar",
-          progressTextId: "mistbornRelatedProgressText", series: ["Mistborn Companion"] }
+        {
+            galleryId: "mistbornEra1Gallery", progressBarId: "mistbornEra1ProgressBar",
+            progressTextId: "mistbornEra1ProgressText", series: ["Mistborn Era 1"]
+        },
+        {
+            galleryId: "mistbornEra2Gallery", progressBarId: "mistbornEra2ProgressBar",
+            progressTextId: "mistbornEra2ProgressText", series: ["Mistborn Era 2"]
+        },
+        {
+            galleryId: "mistbornRelatedGallery", progressBarId: "mistbornRelatedProgressBar",
+            progressTextId: "mistbornRelatedProgressText", series: ["Mistborn Companion"]
+        }
     ],
     stormlightPage: [
-        { galleryId: "stormlightNovelsGallery", progressBarId: "stormlightNovelsProgressBar",
-          progressTextId: "stormlightNovelsProgressText", series: ["The Stormlight Archive"], type: "Novel" },
-        { galleryId: "stormlightNovellasGallery", progressBarId: "stormlightNovellasProgressBar",
-          progressTextId: "stormlightNovellasProgressText", series: ["The Stormlight Archive"], type: "Novella" }
+        {
+            galleryId: "stormlightNovelsGallery", progressBarId: "stormlightNovelsProgressBar",
+            progressTextId: "stormlightNovelsProgressText", series: ["The Stormlight Archive"], type: "Novel"
+        },
+        {
+            galleryId: "stormlightNovellasGallery", progressBarId: "stormlightNovellasProgressBar",
+            progressTextId: "stormlightNovellasProgressText", series: ["The Stormlight Archive"], type: "Novella"
+        }
     ],
     standalonePage: [
-        { galleryId: "standaloneNovelsGallery", progressBarId: "standaloneNovelsProgressBar",
-          progressTextId: "standaloneNovelsProgressText", series: ["Elantris", "Standalone"], type: "Novel" },
-        { galleryId: "standaloneOtherGallery", progressBarId: "standaloneOtherProgressBar",
-          progressTextId: "standaloneOtherProgressText",
-          series: ["Sel Standalone", "White Sand", "Threnody Standalone"] }
+        {
+            galleryId: "standaloneNovelsGallery", progressBarId: "standaloneNovelsProgressBar",
+            progressTextId: "standaloneNovelsProgressText", series: ["Elantris", "Standalone"], type: "Novel"
+        },
+        {
+            galleryId: "standaloneOtherGallery", progressBarId: "standaloneOtherProgressBar",
+            progressTextId: "standaloneOtherProgressText",
+            series: ["Sel Standalone", "White Sand", "Threnody Standalone"]
+        }
     ],
     secretProjectsPage: [
         { galleryId: "secretProjectsGallery", series: ["Cosmere Secret Projects"] }
@@ -44,16 +58,26 @@ const COSMERE_SECTIONS = {
 };
 
 const COSMERE_SUMMARIES = [
-    { pageId: "cosmereGuidePage", barId: "cosmereProgressBar", textId: "cosmereProgressText",
-      percentageId: "cosmereProgressPercentage", unit: "books" },
-    { pageId: "mistbornPage", barId: "mistbornProgressBar", textId: "mistbornProgressText",
-      percentageId: "mistbornProgressPercentage" },
-    { pageId: "stormlightPage", barId: "stormlightProgressBar", textId: "stormlightProgressText",
-      percentageId: "stormlightProgressPercentage" },
-    { pageId: "standalonePage", barId: "standaloneProgressBar", textId: "standaloneProgressText",
-      percentageId: "standaloneProgressPercentage" },
-    { pageId: "secretProjectsPage", barId: "secretProjectsProgressBar", textId: "secretProjectsProgressText",
-      percentageId: "secretProjectsProgressPercentage" }
+    {
+        pageId: "cosmereGuidePage", barId: "cosmereProgressBar", textId: "cosmereProgressText",
+        percentageId: "cosmereProgressPercentage", unit: "books"
+    },
+    {
+        pageId: "mistbornPage", barId: "mistbornProgressBar", textId: "mistbornProgressText",
+        percentageId: "mistbornProgressPercentage"
+    },
+    {
+        pageId: "stormlightPage", barId: "stormlightProgressBar", textId: "stormlightProgressText",
+        percentageId: "stormlightProgressPercentage"
+    },
+    {
+        pageId: "standalonePage", barId: "standaloneProgressBar", textId: "standaloneProgressText",
+        percentageId: "standaloneProgressPercentage"
+    },
+    {
+        pageId: "secretProjectsPage", barId: "secretProjectsProgressBar", textId: "secretProjectsProgressText",
+        percentageId: "secretProjectsProgressPercentage"
+    }
 ];
 
 const SEARCH_CATEGORY_NAMES = {
@@ -190,6 +214,19 @@ function refreshAllProgress() {
             unit: summary.unit
         });
     }
+
+    // Update the homepage's overall reading progress.
+    // Uses the same saved data as every other progress panel.
+    updateProgressPanel(
+        "homeCosmereProgressBar",
+        "homeCosmereProgressText",
+        COSMERE_BOOKS,
+        completedIds,
+        {
+            percentageId: "homeCosmereProgressPercentage",
+            unit: "works"
+        }
+    );
 
     for (const sections of Object.values(COSMERE_SECTIONS)) {
         for (const section of sections) {
@@ -441,7 +478,7 @@ function renderCosmereGallery(containerId, books) {
             activeButton = activePanel = null;
             activeTitle = "";
             if (isClosing) return;
-            
+
             const panel = createBookDetailsPanel(book, null, null, containerId);
             panel.hidden = false;
 
@@ -593,7 +630,26 @@ if (cosmereBookSearch) {
 const backToTopButton = document.createElement("button");
 backToTopButton.id = "backToTopButton";
 backToTopButton.type = "button";
-backToTopButton.textContent = "↑ Back to Top";
+
+backToTopButton.innerHTML = `
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M12 19V5"></path>
+        <path d="m5 12 7-7 7 7"></path>
+    </svg>
+`;
+
+backToTopButton.setAttribute("aria-label", "Back to top");
+backToTopButton.title = "Back to top";
 backToTopButton.hidden = true;
 document.body.appendChild(backToTopButton);
 
