@@ -2122,3 +2122,201 @@ button:focus-visible {
     }
 
 }
+
+/* ==========================================
+   CONTACT THE WORLDHOPPER — HOMEPAGE
+   ========================================== */
+
+/* Main contact panel */
+.homeContact {
+    width: 100%;
+    max-width: 620px;
+
+    margin: 32px auto 0;
+    padding: 28px 30px;
+
+    background: #181D1A;
+    border: 1px solid #665438;
+    border-radius: 8px;
+
+    text-align: center;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Decorative contact icon */
+.homeContactIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 14px;
+
+    color: #D9B36A;
+}
+
+.homeContactIcon svg {
+    display: block;
+    width: 28px;
+    height: 28px;
+}
+
+/* Heading */
+.homeContact h2 {
+    margin: 0;
+
+    color: #D9B36A;
+
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+
+    line-height: 1.5;
+    letter-spacing: 0.6px;
+}
+
+/* Thin golden decorative divider */
+.homeContactDivider {
+    width: 70px;
+    height: 1px;
+
+    margin: 16px auto 20px;
+
+    background: #B9975B;
+}
+
+/* Description text */
+.homeContact .homeContactText {
+    max-width: 480px;
+
+    margin: 0 auto 12px;
+
+    color: #D6CEBC;
+
+    font-family: 'Lora', Georgia, serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    line-height: 1.8;
+}
+
+/* Contact Me on X link */
+.homeContactButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+    min-height: 44px;
+
+    margin-top: 12px;
+    padding: 12px 24px;
+
+    background: #1B201D;
+
+    border: 1px solid #B9975B;
+    border-radius: 6px;
+
+    color: #F1E5CB;
+
+    font-family: 'Lora', Georgia, serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================================
+   DESKTOP GOLDEN HOVER EFFECTS
+   ========================================== */
+
+@media (hover: hover) and (pointer: fine) {
+
+    /* Static golden glow for the panel */
+    .homeContact:hover {
+        border-color: #E5BE70;
+
+        box-shadow:
+            0 0 0 1px rgba(229, 190, 112, 0.35),
+            0 0 16px rgba(217, 179, 106, 0.40),
+            0 0 32px rgba(217, 179, 106, 0.16);
+
+        transform: none;
+    }
+
+    /* Interactive golden glow for the X link */
+    .homeContactButton:hover {
+        background: #263329;
+        border-color: #E5BE70;
+        color: #D9B36A;
+
+        box-shadow:
+            0 0 0 1px rgba(229, 190, 112, 0.25),
+            0 0 14px rgba(217, 179, 106, 0.30);
+
+        transform: none;
+    }
+
+}
+
+/* Keyboard accessibility */
+.homeContactButton:focus-visible {
+    outline: 2px solid #E5BE70;
+    outline-offset: 4px;
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    .homeContact {
+        max-width: 100%;
+
+        margin-top: 24px;
+        padding: 24px 18px;
+    }
+
+    .homeContact h2 {
+        font-size: 17px;
+        letter-spacing: 0.3px;
+    }
+
+    .homeContact .homeContactText {
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .homeContactButton {
+        padding: 11px 20px;
+        font-size: 13px;
+    }
+
+}
+
+/* Golden touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+
+    .homeContactButton:active {
+        background: #263329;
+        border-color: #E5BE70;
+        color: #D9B36A;
+
+        box-shadow:
+            0 0 12px rgba(217, 179, 106, 0.30);
+    }
+
+}
