@@ -5,7 +5,14 @@
 
 "use strict";
 
-const MAIN_PAGES = ["mainMenu", "introduction", "cosmereExplorer"];
+
+const MAIN_PAGES = [
+    "mainMenu",
+    "introduction",
+    "cosmereExplorer",
+    "creditsPage"
+];
+
 const COSMERE_PAGES = [
     "cosmereMenu", "mistbornPage", "stormlightPage",
     "standalonePage", "secretProjectsPage", "cosmereGuidePage"

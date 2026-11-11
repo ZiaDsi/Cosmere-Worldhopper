@@ -247,12 +247,121 @@
 
                     </section>
 
+                    <!-- =====================================
+     HOMEPAGE CREDITS LINK
+     ===================================== -->
+
+                    <div class="homeCreditsRow">
+
+                        <button type="button" class="homeCreditsLink" onclick="showPage('creditsPage')"
+                            aria-label="View Credits and Acknowledgments">
+
+                            <span aria-hidden="true">&#10022;</span>
+                            Credits &amp; Acknowledgments
+
+                        </button>
+
+                    </div>
+
+
                 </div>
             </div>
         </div>
 
-        <!-- Spoiler-free introduction -->
+        <!-- =====================================
+     CREDITS & ACKNOWLEDGMENTS PAGE
+     ===================================== -->
 
+        <div id="creditsPage" hidden>
+
+            <!-- Back Navigation -->
+            <div class="cosmereBackRow">
+                <button type="button" onclick="goBack()">
+                    &larr; Back to Home
+                </button>
+            </div>
+
+            <div class="creditsContent">
+
+                <h1>Credits &amp; Acknowledgments</h1>
+
+                <p class="creditsIntro">
+                    Cosmere Worldhopper is an independent fan project
+                    inspired by the incredible worlds and stories
+                    of Brandon Sanderson.
+                </p>
+
+                <!-- The Cosmere -->
+                <section class="creditsSection">
+                    <h2>The Cosmere</h2>
+
+                    <p>
+                        The Cosmere universe and its stories were created
+                        by Brandon Sanderson. Special thanks to Brandon
+                        Sanderson and Dragonsteel Entertainment for
+                        inspiring this fan project.
+                    </p>
+
+                    <a href="https://www.brandonsanderson.com/" target="_blank" rel="noopener noreferrer">
+                        Official Brandon Sanderson Website
+                    </a>
+                </section>
+
+                <!-- Background Artwork -->
+                <section class="creditsSection">
+                    <h2>Background Artwork</h2>
+
+                    <p>
+                        The Cosmere star chart artwork was originally
+                        created by Isaac Stewart. The wallpaper adaptation
+                        was created by Sasori, associated with Cosmere.es.
+                    </p>
+
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2467053632" target="_blank"
+                        rel="noopener noreferrer">
+                        Original Wallpaper Source
+                    </a>
+                </section>
+
+                <!-- Book Covers -->
+                <section class="creditsSection">
+                    <h2>Book Cover Artwork</h2>
+
+                    <p>
+                        The book covers featured throughout this website
+                        are the work of their respective artists,
+                        designers, and publishers.
+
+                        All rights to these illustrations and designs
+                        remain with their respective rights holders.
+                    </p>
+                </section>
+
+                <!-- Website Development -->
+                <section class="creditsSection">
+                    <h2>Website Development</h2>
+
+                    <p>
+                        Cosmere Worldhopper is a free, independent
+                        reading companion created by a fan to help
+                        readers discover books, explore reading orders,
+                        and track their journey through the Cosmere.
+                    </p>
+                </section>
+
+                <!-- Disclaimer -->
+                <p class="creditsDisclaimer">
+                    Cosmere Worldhopper is an unofficial, non-commercial
+                    fan project. It is not affiliated with, sponsored by,
+                    or endorsed by Brandon Sanderson, Dragonsteel
+                    Entertainment, or their publishing partners.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Spoiler-free introduction -->
         <div id="introduction" hidden>
 
             <!-- Back Navigation -->
