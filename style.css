@@ -2597,3 +2597,345 @@ button:focus-visible {
     }
 
 }
+
+/* ==========================================
+   COSMERE WORLDHOPPER — LANGUAGE SWITCHER
+   ========================================== */
+
+/* Keep both language circles side by side. */
+.languageSwitcher {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    gap: 8px;
+    direction: ltr;
+}
+
+/* Shared circular button design. */
+.siteHeader .languageCircle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 40px;
+
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    height: 40px;
+    min-height: 40px;
+
+    margin: 0;
+    padding: 0;
+
+    background: #1B201D;
+    color: #D9B36A;
+
+    border: 1px solid #B9975B;
+    border-radius: 50%;
+
+    font-family: Arial, Tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Arabic character gets appropriate typography. */
+.siteHeader .languageCircle[data-language="ar"] {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 18px;
+}
+
+/* The currently selected language. */
+.siteHeader .languageCircle[aria-pressed="true"] {
+    background: #B9975B;
+    color: #101315;
+    border-color: #E5BE70;
+
+    box-shadow:
+        0 0 12px rgba(217, 179, 106, 0.25);
+}
+
+/* Desktop hover effects. */
+@media (hover: hover) and (pointer: fine) {
+
+    .siteHeader .languageCircle:hover {
+        border-color: #E5BE70;
+        box-shadow:
+            0 0 14px rgba(217, 179, 106, 0.4);
+    }
+
+    .siteHeader .languageCircle[aria-pressed="true"]:hover {
+        background: #B9975B;
+        color: #101315;
+    }
+}
+
+/* Keyboard accessibility. */
+.siteHeader .languageCircle:focus-visible {
+    outline: 2px solid #E5BE70;
+    outline-offset: 4px;
+}
+
+/* ==========================================
+   MOBILE LANGUAGE SWITCHER
+   ========================================== */
+
+@media (max-width: 700px) {
+
+    .siteHeaderInner {
+        display: grid;
+
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "brand brand"
+            "navigation language";
+
+        column-gap: 6px;
+        row-gap: 2px;
+    }
+
+    .siteHeader .siteBrand {
+        grid-area: brand;
+        justify-self: center;
+    }
+
+    .siteNav {
+        grid-area: navigation;
+        min-width: 0;
+        gap: 2px;
+    }
+
+    .siteHeader .siteNavButton {
+        padding: 7px 4px;
+        font-size: clamp(9px, 2.8vw, 11px);
+    }
+
+    .languageSwitcher {
+        grid-area: language;
+        gap: 5px;
+    }
+
+    .siteHeader .languageCircle {
+        flex-basis: 34px;
+
+        width: 34px;
+        min-width: 34px;
+        max-width: 34px;
+        height: 34px;
+        min-height: 34px;
+
+        font-size: 10px;
+    }
+
+    .siteHeader .languageCircle[data-language="ar"] {
+        font-size: 16px;
+    }
+}
+
+/* ==========================================
+   BILINGUAL HEADER — DIRECTION AND TYPOGRAPHY
+   ========================================== */
+
+/* Preserve the original header layout in both languages. */
+.siteHeaderInner {
+    direction: ltr;
+}
+
+/* Never reverse the Cosmere Worldhopper brand. */
+.siteHeader .siteBrand,
+.heroContent h1.cosmereHeroTitle {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+/* Make desktop navigation easier to read. */
+.siteHeader .siteNavButton {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+/* Adjust navigation typography for smaller screens. */
+@media (max-width: 700px) {
+    .siteHeader .siteNavButton {
+        font-size: clamp(11px, 2.9vw, 13px);
+    }
+}
+
+/* ==========================================
+   COMPLETE ARABIC SUPPORT — LANGUAGE-ONLY STYLES
+   English styles and the established website aesthetic remain intact.
+   ========================================== */
+
+/* The brand and individual English book titles never reverse with Arabic. */
+.siteHeader .siteBrand,
+.heroContent h1.cosmereHeroTitle,
+.cosmereGalleryCard h3,
+.cosmereReadingTitle,
+.cosmereDetailsPanel h3 {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+/* Keep the existing brand/navigation/circle arrangement in either language. */
+.siteHeaderInner,
+.siteNav,
+.languageSwitcher {
+    direction: ltr;
+}
+
+/* Arabic UI fonts: leave the original Cinzel / Lora in the English version. */
+html[lang="ar"] body {
+    font-family: 'Noto Naskh Arabic', Tahoma, Arial, sans-serif;
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h4,
+html[lang="ar"] .heroTag,
+html[lang="ar"] button:not(.siteBrand):not(.languageCircle),
+html[lang="ar"] .homeContactButton,
+html[lang="ar"] .creditsSection a,
+html[lang="ar"] .cosmereReadingMeta,
+html[lang="ar"] .cosmereGalleryMeta,
+html[lang="ar"] .cosmereSearchContainer label,
+html[lang="ar"] #cosmereBookSearch,
+html[lang="ar"] .cosmereSearchStatus,
+html[lang="ar"] .homeJourneyStats {
+    font-family: 'Noto Naskh Arabic', Tahoma, Arial, sans-serif;
+    letter-spacing: 0;
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] .heroTag {
+    font-family: 'Amiri', 'Noto Naskh Arabic', Tahoma, serif;
+}
+
+html[lang="ar"] .siteHeader .siteNavButton {
+    font-family: 'Noto Naskh Arabic', Tahoma, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    direction: rtl;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+html[lang="ar"] .siteHeader .siteBrand,
+html[lang="ar"] .heroContent h1.cosmereHeroTitle,
+html[lang="ar"] .cosmereGalleryCard h3,
+html[lang="ar"] .cosmereReadingTitle,
+html[lang="ar"] .cosmereDetailsPanel h3 {
+    font-family: 'Cinzel', Georgia, serif;
+    letter-spacing: inherit;
+}
+
+html[lang="ar"] .siteHeader .siteBrand {
+    letter-spacing: 1.5px;
+}
+
+html[lang="ar"] .heroContent h1.cosmereHeroTitle {
+    letter-spacing: 2px;
+}
+
+html[dir="rtl"] .cosmereReadingItem,
+html[dir="rtl"] .cosmereDetailsPanel,
+html[dir="rtl"] .cosmereGalleryDetailsHost,
+html[dir="rtl"] .cosmereProgressCard,
+html[dir="rtl"] .cosmereProgressCard > p,
+html[dir="rtl"] .homeJourney,
+html[dir="rtl"] .creditsSection {
+    text-align: right;
+}
+
+html[dir="rtl"] .cosmereReadingTitle,
+html[dir="rtl"] .cosmereDetailsPanel h3 {
+    text-align: right;
+}
+
+html[dir="rtl"] .cosmereDetailsPanel .cosmereBookOverview,
+html[dir="rtl"] .cosmereSpoilerWarning,
+html[dir="rtl"] .cosmereSpoilerSection .cosmereSpoilerText {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] #cosmereBookSearch {
+    direction: auto;
+    text-align: right;
+}
+
+html[lang="ar"] .cosmereBookOverview,
+html[lang="ar"] .creditsSection p,
+html[lang="ar"] .creditsContent .creditsIntro,
+html[lang="ar"] .creditsContent .creditsDisclaimer {
+    line-height: 1.95;
+}
+
+/* Prevent the new Credits text span from inheriting the decorative star's size. */
+.homeCreditsRow .homeCreditsLink .homeCreditsText {
+    font-size: inherit;
+}
+
+/* Keep the English name in its original typographic treatment. */
+html[dir="rtl"] .siteBrand,
+html[dir="rtl"] .cosmereHeroTitle {
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+    html[lang="ar"] .siteHeader .siteNavButton {
+        font-size: 14px;
+        padding: 7px 3px;
+    }
+}
+
+/* The additional language controls need a little room on small desktops. */
+@media (min-width: 701px) and (max-width: 850px) {
+    .siteHeaderInner {
+        gap: 8px;
+        padding-inline: 10px;
+    }
+
+    .siteHeader .siteBrand {
+        padding: 8px;
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+
+    .siteNav {
+        gap: 4px;
+    }
+
+    .siteHeader .siteNavButton {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+
+    html[lang="ar"] .siteHeader .siteNavButton {
+        font-size: 15px;
+    }
+
+    .languageSwitcher {
+        gap: 5px;
+    }
+
+    .siteHeader .languageCircle {
+        flex: 0 0 36px;
+        width: 36px;
+        min-width: 36px;
+        max-width: 36px;
+        height: 36px;
+        min-height: 36px;
+    }
+}

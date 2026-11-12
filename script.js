@@ -6,6 +6,119 @@
 "use strict";
 
 
+/* ==========================================
+   COSMERE WORLDHOPPER — LANGUAGE SYSTEM
+   ========================================== */
+
+// Load the visitor's saved language.
+// English is the default.
+function getSavedCosmereLanguage() {
+    try {
+        return localStorage.getItem(COSMERE_LANGUAGE_KEY) === "ar"
+            ? "ar"
+            : "en";
+    } catch (error) {
+        return "en";
+    }
+}
+
+let currentCosmereLanguage = getSavedCosmereLanguage();
+
+// Get a translation using a key such as "nav.discover".
+// Fall back to English if a translation is missing.
+function translateCosmereText(key, variables = {}) {
+    const parts = key.split(".");
+
+    function lookup(language) {
+        return parts.reduce(
+            (value, part) => value?.[part],
+            COSMERE_TRANSLATIONS[language]
+        );
+    }
+
+    const template = lookup(currentCosmereLanguage) ?? lookup("en") ?? key;
+    // All translations are assigned with textContent, never interpreted as HTML.
+    return String(template).replace(/\{(\w+)\}/g,
+        (match, name) => Object.hasOwn(variables, name) ? String(variables[name]) : match);
+}
+
+// These are presentation labels only: IDs, series filters, and book titles stay original.
+function localizeCosmereSeries(series) {
+    return translateCosmereText(`series.${series}`);
+}
+
+function localizeCosmereWorkType(type) {
+    return translateCosmereText(`types.${type}`);
+}
+
+function localizeCosmereDescription(bookId) {
+    if (currentCosmereLanguage === "ar") {
+        return COSMERE_ARABIC_DESCRIPTIONS[bookId] ?? getCosmereDescription(bookId);
+    }
+    return getCosmereDescription(bookId);
+}
+
+function localizeCosmereBookFacts(book, position = null, total = null) {
+    const facts = [
+        translateCosmereText("details.author"),
+        translateCosmereText("details.series", { series: localizeCosmereSeries(book.series) }),
+        translateCosmereText("details.workType", { type: localizeCosmereWorkType(book.type) }),
+        translateCosmereText("details.year", { year: book.year })
+    ];
+    if (Number.isInteger(position) && Number.isInteger(total)) {
+        facts.push(translateCosmereText("details.position", { position, total }));
+    }
+    return facts;
+}
+
+// Apply the selected language to the website.
+
+function applyCosmereLanguage() {
+    const isArabic = currentCosmereLanguage === "ar";
+    document.documentElement.lang = isArabic ? "ar" : "en";
+    document.documentElement.dir = isArabic ? "rtl" : "ltr";
+
+    // Preserve the website name and all book titles in English.
+    document.title = translateCosmereText("attrs.siteTitle");
+    const description = document.querySelector('meta[name="description"]');
+    if (description) description.content = translateCosmereText("attrs.siteDescription");
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        element.textContent = translateCosmereText(element.dataset.i18n);
+    });
+    document.querySelectorAll("[data-i18n-aria-label]").forEach(element => {
+        element.setAttribute("aria-label", translateCosmereText(element.dataset.i18nAriaLabel));
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+        element.setAttribute("placeholder", translateCosmereText(element.dataset.i18nPlaceholder));
+    });
+
+    document.querySelectorAll(".languageCircle").forEach(button => {
+        const isSelected = button.dataset.language === currentCosmereLanguage;
+        button.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    // Update content that script.js generated earlier, without closing open
+    // detail panels or revealing any protected descriptions.
+    refreshLocalizedCosmereContent();
+}
+
+// Change the language and remember the choice.
+function setCosmereLanguage(language) {
+    currentCosmereLanguage = language === "ar" ? "ar" : "en";
+
+    try {
+        localStorage.setItem(
+            COSMERE_LANGUAGE_KEY,
+            currentCosmereLanguage
+        );
+    } catch (error) {
+        console.warn("Language preference could not be saved:", error);
+    }
+
+    applyCosmereLanguage();
+}
+
 const MAIN_PAGES = [
     "mainMenu",
     "introduction",
@@ -200,8 +313,13 @@ function updateProgressPanel(barId, textId, books, completedIds, options = {}) {
     const progress = calculateProgress(books, completedIds);
     bar.max = progress.total || 1;
     bar.value = progress.completed;
-    text.textContent = `${progress.completed} of ${progress.total} ${options.unit || "works"} completed` +
-        (options.showPercent ? ` (${progress.percentage}%)` : "");
+    const unit = options.unit === "books" ? "books" : "works";
+    text.textContent = translateCosmereText(`progress.${unit}`, {
+        completed: progress.completed,
+        total: progress.total
+    }) + (options.showPercent
+        ? translateCosmereText("progress.percentage", { percentage: progress.percentage })
+        : "");
 
     if (options.percentageId) {
         const percentage = document.getElementById(options.percentageId);
@@ -250,10 +368,11 @@ function refreshCompletionLabel(checkbox) {
 
     label.classList.toggle("isCompleted", checkbox.checked);
     const text = label.querySelector("span");
-    if (text) text.textContent = checkbox.checked ? "Completed" : "Mark as Read";
-    checkbox.setAttribute("aria-label", checkbox.checked
-        ? `Mark ${checkbox.dataset.bookTitle} as unread`
-        : `Mark ${checkbox.dataset.bookTitle} as read`);
+    if (text) text.textContent = translateCosmereText(
+        checkbox.checked ? "details.completed" : "details.read");
+    checkbox.setAttribute("aria-label", translateCosmereText(
+        checkbox.checked ? "details.markUnreadAria" : "details.markReadAria",
+        { title: checkbox.dataset.bookTitle }));
 }
 
 function syncVisibleCompletionControls() {
@@ -288,7 +407,7 @@ function createCompletionControl(book, completedIds) {
         if (!saveCompletedCosmereBooks(updated)) {
             checkbox.checked = !checkbox.checked;
             refreshCompletionLabel(checkbox);
-            window.alert("Reading progress could not be saved.");
+            window.alert(translateCosmereText("details.readError"));
             return;
         }
 
@@ -304,6 +423,10 @@ window.addEventListener("storage", event => {
         syncVisibleCompletionControls();
         refreshAllProgress();
     }
+    if (event.key === COSMERE_LANGUAGE_KEY || event.key === null) {
+        currentCosmereLanguage = getSavedCosmereLanguage();
+        applyCosmereLanguage();
+    }
 });
 
 /* -------------------- SHARED BOOK DETAILS -------------------- */
@@ -317,7 +440,7 @@ function resetCosmereSpoiler(panel) {
     panel.querySelector(".cosmereSpoilerMask").hidden = false;
 
     const button = panel.querySelector(".cosmereSpoilerToggle");
-    button.textContent = "Reveal Description";
+    button.textContent = translateCosmereText("details.revealDescription");
     button.setAttribute("aria-expanded", "false");
 }
 
@@ -325,24 +448,23 @@ function createBookDetailsPanel(book, position = null, total = null, scope = "re
     const panel = document.createElement("div");
     panel.className = "cosmereDetailsPanel";
     panel.id = `cosmere-details-${scope}-${book.id}`;
+    panel.dataset.bookId = book.id;
+    if (Number.isInteger(position) && Number.isInteger(total)) {
+        panel.dataset.position = String(position);
+        panel.dataset.total = String(total);
+    }
     panel.hidden = true;
 
     const heading = document.createElement("h3");
     heading.textContent = book.title;
+    heading.dir = "ltr";
+    heading.lang = "en";
     panel.appendChild(heading);
 
-    const facts = [
-        "Author: Brandon Sanderson",
-        `Series: ${book.series}`,
-        `Work Type: ${book.type}`,
-        `Publication Year: ${book.year}`
-    ];
-    if (Number.isInteger(position) && Number.isInteger(total)) {
-        facts.push(`Reading Position: ${position} of ${total}`);
-    }
-
+    const facts = localizeCosmereBookFacts(book, position, total);
     for (const fact of facts) {
         const paragraph = document.createElement("p");
+        paragraph.className = "cosmereBookFact";
         paragraph.textContent = fact;
         panel.appendChild(paragraph);
     }
@@ -350,10 +472,11 @@ function createBookDetailsPanel(book, position = null, total = null, scope = "re
     const prerequisites = getCosmereSpoilerPrerequisites(book.id);
     if (!prerequisites.length) {
         const title = document.createElement("h4");
-        title.textContent = "Spoiler-Free Overview";
+        title.className = "cosmereSpoilerFreeHeading";
+        title.textContent = translateCosmereText("details.overview");
         const overview = document.createElement("p");
         overview.className = "cosmereBookOverview";
-        overview.textContent = getCosmereDescription(book.id);
+        overview.textContent = localizeCosmereDescription(book.id);
         panel.append(title, overview);
         return panel;
     }
@@ -362,12 +485,13 @@ function createBookDetailsPanel(book, position = null, total = null, scope = "re
     spoilerSection.className = "cosmereSpoilerSection";
 
     const warningHeading = document.createElement("h4");
-    warningHeading.textContent = "⚠ Spoiler Warning";
+    warningHeading.textContent = translateCosmereText("details.spoilerHeading");
 
     const warning = document.createElement("p");
     warning.className = "cosmereSpoilerWarning";
-    const warnedBooks = prerequisites.map(id => findCosmereBook(id)?.title || id).join(", ");
-    warning.textContent = `This description may contain spoilers for: ${warnedBooks}.`;
+    const warnedBooks = prerequisites.map(id => findCosmereBook(id)?.title || id)
+        .join(currentCosmereLanguage === "ar" ? "، " : ", ");
+    warning.textContent = translateCosmereText("details.spoilerText", { titles: warnedBooks });
 
     // Protected descriptions are only inserted into the DOM after explicit consent.
     const mask = document.createElement("div");
@@ -382,7 +506,7 @@ function createBookDetailsPanel(book, position = null, total = null, scope = "re
     const button = document.createElement("button");
     button.type = "button";
     button.className = "cosmereSpoilerToggle";
-    button.textContent = "Reveal Description";
+    button.textContent = translateCosmereText("details.revealDescription");
     button.setAttribute("aria-controls", spoilerText.id);
     button.setAttribute("aria-expanded", "false");
 
@@ -391,10 +515,10 @@ function createBookDetailsPanel(book, position = null, total = null, scope = "re
         if (revealed) {
             resetCosmereSpoiler(panel);
         } else {
-            spoilerText.textContent = getCosmereDescription(book.id);
+            spoilerText.textContent = localizeCosmereDescription(book.id);
             spoilerText.hidden = false;
             mask.hidden = true;
-            button.textContent = "Hide Description";
+            button.textContent = translateCosmereText("details.hideDescription");
             button.setAttribute("aria-expanded", "true");
         }
     });
@@ -408,14 +532,18 @@ function createDetailsButton(book, controlledId) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "cosmereDetailsToggle";
+    button.dataset.bookTitle = book.title;
     button.setAttribute("aria-controls", controlledId);
     setDetailsButtonState(button, book.title, false);
     return button;
 }
 
 function setDetailsButtonState(button, title, expanded) {
-    button.textContent = expanded ? "Hide Details" : "View Details";
-    button.setAttribute("aria-label", `${expanded ? "Hide" : "View"} details for ${title}`);
+    const action = translateCosmereText(expanded ? "details.hideDetails" : "details.viewDetails");
+    button.textContent = action;
+    button.setAttribute("aria-label", translateCosmereText("details.detailsAria", {
+        action, title
+    }));
     button.setAttribute("aria-expanded", String(expanded));
 }
 
@@ -426,14 +554,14 @@ function createBookCover(book, compact = false) {
     if (book.cover) {
         const image = document.createElement("img");
         image.src = book.cover;
-        image.alt = `${book.title} book cover`;
+        image.alt = translateCosmereText("details.coverAlt", { title: book.title });
         image.loading = "lazy";
         image.decoding = "async";
         container.appendChild(image);
     } else {
         container.classList.add(compact
             ? "cosmereReadingCoverPlaceholder" : "cosmereGalleryCoverPlaceholder");
-        container.textContent = "Cover coming soon";
+        container.textContent = translateCosmereText("details.coverSoon");
         container.setAttribute("aria-hidden", "true");
     }
     return container;
@@ -467,13 +595,16 @@ function renderCosmereGallery(containerId, books) {
     for (const book of books) {
         const card = document.createElement("article");
         card.className = "cosmereGalleryCard";
+        card.dataset.bookId = book.id;
         const cover = createBookCover(book);
 
         const title = document.createElement("h3");
         title.textContent = book.title;
+        title.dir = "ltr";
+        title.lang = "en";
         const metadata = document.createElement("p");
         metadata.className = "cosmereGalleryMeta";
-        metadata.textContent = `${book.type} • ${book.year}`;
+        metadata.textContent = `${localizeCosmereWorkType(book.type)} • ${book.year}`;
 
         const detailsButton = createDetailsButton(book, hostId);
         detailsButton.addEventListener("click", () => {
@@ -534,11 +665,14 @@ function renderCosmereReadingOrder(orderType = currentReadingOrder) {
     books.forEach((book, index) => {
         const item = document.createElement("li");
         item.className = "cosmereReadingItem";
+        item.dataset.bookId = book.id;
 
         const position = document.createElement("span");
         position.className = "cosmereReadingNumber";
         position.textContent = String(index + 1);
-        position.setAttribute("aria-label", `Reading position ${index + 1}`);
+        position.setAttribute("aria-label", translateCosmereText("details.readingNumber", {
+            position: index + 1
+        }));
         const cover = createBookCover(book, true);
 
         const details = document.createElement("div");
@@ -546,9 +680,11 @@ function renderCosmereReadingOrder(orderType = currentReadingOrder) {
         const title = document.createElement("span");
         title.className = "cosmereReadingTitle";
         title.textContent = book.title;
+        title.dir = "ltr";
+        title.lang = "en";
         const metadata = document.createElement("span");
         metadata.className = "cosmereReadingMeta";
-        metadata.textContent = `${book.series} • ${book.type} • ${book.year}`;
+        metadata.textContent = `${localizeCosmereSeries(book.series)} • ${localizeCosmereWorkType(book.type)} • ${book.year}`;
 
         const panel = createBookDetailsPanel(book, index + 1, books.length);
         const toggle = createDetailsButton(book, panel.id);
@@ -580,8 +716,18 @@ function renderCosmereReadingOrder(orderType = currentReadingOrder) {
             .filter(([, sections]) => sections.some(s =>
                 s.series.includes(book.series) && (!s.type || s.type === book.type)))
             .map(([pageId]) => SEARCH_CATEGORY_NAMES[pageId]);
-        item.dataset.search = `${book.title} ${book.series} ${book.type} ${book.year} ${categories.join(" ")}`
-            .toLocaleLowerCase();
+        // Search remains useful in both languages, while spoiler descriptions
+        // stay completely outside the search index.
+        const arabicCategories = Object.entries(COSMERE_SECTIONS)
+            .filter(([, sections]) => sections.some(s =>
+                s.series.includes(book.series) && (!s.type || s.type === book.type)))
+            .map(([pageId]) => COSMERE_TRANSLATIONS.ar.searchCategories[pageId]);
+        item.dataset.search = [
+            book.title, book.series, book.type, book.year, ...categories,
+            COSMERE_TRANSLATIONS.ar.series[book.series] || "",
+            COSMERE_TRANSLATIONS.ar.types[book.type] || "",
+            ...arabicCategories
+        ].join(" ").toLocaleLowerCase();
         readingList.appendChild(item);
     });
 
@@ -612,14 +758,98 @@ function filterCosmereReadingOrder() {
 
     if (status) {
         status.textContent = !term
-            ? `Showing all ${items.length} books`
+            ? translateCosmereText("search.showAll", { total: items.length })
             : matches === 0
-                ? "No matching books found. Try another search."
-                : `Showing ${matches} of ${items.length} books`;
+                ? translateCosmereText("search.none")
+                : translateCosmereText("search.showCount", {
+                    matches, total: items.length
+                });
         status.dataset.empty = String(Boolean(term) && matches === 0);
         status.hidden = false;
     }
     if (clearButton) clearButton.hidden = !input.value;
+}
+
+
+/* -------------------- TRANSLATE ALREADY RENDERED CONTROLS -------------------- */
+
+function refreshLocalizedCosmereContent() {
+    refreshAllProgress();
+    syncVisibleCompletionControls();
+
+    document.querySelectorAll(".cosmereGalleryCard[data-book-id]").forEach(card => {
+        const book = findCosmereBook(card.dataset.bookId);
+        const metadata = card.querySelector(".cosmereGalleryMeta");
+        if (book && metadata) {
+            metadata.textContent = `${localizeCosmereWorkType(book.type)} • ${book.year}`;
+        }
+    });
+
+    document.querySelectorAll(".cosmereReadingItem[data-book-id]").forEach(item => {
+        const book = findCosmereBook(item.dataset.bookId);
+        if (!book) return;
+        const metadata = item.querySelector(".cosmereReadingMeta");
+        if (metadata) {
+            metadata.textContent = `${localizeCosmereSeries(book.series)} • ${localizeCosmereWorkType(book.type)} • ${book.year}`;
+        }
+        const number = item.querySelector(".cosmereReadingNumber");
+        if (number) number.setAttribute("aria-label", translateCosmereText("details.readingNumber", {
+            position: number.textContent
+        }));
+    });
+
+    document.querySelectorAll(".cosmereDetailsPanel[data-book-id]").forEach(panel => {
+        const book = findCosmereBook(panel.dataset.bookId);
+        if (!book) return;
+        const position = panel.dataset.position ? Number(panel.dataset.position) : null;
+        const total = panel.dataset.total ? Number(panel.dataset.total) : null;
+        const facts = localizeCosmereBookFacts(book, position, total);
+        panel.querySelectorAll(".cosmereBookFact").forEach((fact, index) => {
+            if (facts[index]) fact.textContent = facts[index];
+        });
+
+        const spoilerFree = panel.querySelector(".cosmereSpoilerFreeHeading");
+        if (spoilerFree) spoilerFree.textContent = translateCosmereText("details.overview");
+        const warningHeading = panel.querySelector(".cosmereSpoilerSection h4");
+        if (warningHeading) warningHeading.textContent = translateCosmereText("details.spoilerHeading");
+        const warning = panel.querySelector(".cosmereSpoilerWarning");
+        if (warning) {
+            const titles = getCosmereSpoilerPrerequisites(book.id)
+                .map(id => findCosmereBook(id)?.title || id)
+                .join(currentCosmereLanguage === "ar" ? "، " : ", ");
+            warning.textContent = translateCosmereText("details.spoilerText", { titles });
+        }
+
+        // Never insert protected text into a concealed spoiler panel.
+        const overview = panel.querySelector(".cosmereBookOverview");
+        if (overview && !overview.hidden) {
+            overview.textContent = localizeCosmereDescription(book.id);
+        }
+        const spoilerToggle = panel.querySelector(".cosmereSpoilerToggle");
+        if (spoilerToggle) {
+            const expanded = spoilerToggle.getAttribute("aria-expanded") === "true";
+            spoilerToggle.textContent = translateCosmereText(expanded
+                ? "details.hideDescription" : "details.revealDescription");
+        }
+    });
+
+    document.querySelectorAll(".cosmereDetailsToggle[data-book-title]").forEach(button => {
+        setDetailsButtonState(button, button.dataset.bookTitle,
+            button.getAttribute("aria-expanded") === "true");
+    });
+    document.querySelectorAll(".cosmereReadingCover img, .cosmereGalleryCover img").forEach(image => {
+        const book = COSMERE_BOOKS.find(entry => entry.cover === image.getAttribute("src"));
+        if (book) image.alt = translateCosmereText("details.coverAlt", { title: book.title });
+    });
+    document.querySelectorAll(".cosmereReadingCoverPlaceholder, .cosmereGalleryCoverPlaceholder").forEach(element => {
+        element.textContent = translateCosmereText("details.coverSoon");
+    });
+
+    if (document.querySelector("#cosmereReadingList .cosmereReadingItem")) {
+        filterCosmereReadingOrder();
+    }
+    backToTopButton.setAttribute("aria-label", translateCosmereText("details.top"));
+    backToTopButton.title = translateCosmereText("details.top");
 }
 
 const cosmereBookSearch = document.getElementById("cosmereBookSearch");
@@ -655,8 +885,8 @@ backToTopButton.innerHTML = `
     </svg>
 `;
 
-backToTopButton.setAttribute("aria-label", "Back to top");
-backToTopButton.title = "Back to top";
+backToTopButton.setAttribute("aria-label", translateCosmereText("details.top"));
+backToTopButton.title = translateCosmereText("details.top");
 backToTopButton.hidden = true;
 document.body.appendChild(backToTopButton);
 
@@ -671,5 +901,6 @@ backToTopButton.addEventListener("click", () => {
 });
 window.addEventListener("scroll", updateBackToTopVisibility, { passive: true });
 
-// Set initial progress even before opening a category.
-refreshAllProgress();
+// Establish the saved language only after all dynamic controls are initialized.
+// This also populates every progress meter in the visitor's language.
+applyCosmereLanguage();
